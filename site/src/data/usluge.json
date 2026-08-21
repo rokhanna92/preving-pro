@@ -1,0 +1,117 @@
+{
+  "bzr": {
+    "deliverables": [
+      "Akt o proceni rizika za svako radno mesto, sa merama i rokovima",
+      "Pravilnik o BZR i pravilnik o ličnoj zaštitnoj opremi",
+      "Osposobljavanje zaposlenih za bezbedan i zdrav rad",
+      "Vođenje svih propisanih evidencija, po novim obrascima",
+      "Organizacija pregleda opreme za rad i instalacija",
+      "Zastupanje pred Inspekcijom rada i izlazak na teren kod povrede"
+    ],
+    "checklist": [
+      "Akt o proceni rizika",
+      "Akt o imenovanju savetnika za BZR",
+      "Pravilnik o bezbednosti i zdravlju na radu",
+      "Pravilnik o ličnoj zaštitnoj opremi",
+      "Program osposobljavanja zaposlenih",
+      "Evidencije o osposobljavanju i povredama",
+      "Dokazi o pregledima opreme i instalacija",
+      "Uputstva za bezbedan rad po radnim mestima"
+    ]
+  },
+  "zop": {
+    "categories": [
+      {
+        "kicker": "KATEGORIJA I",
+        "title": "Visok rizik",
+        "text": "Obavezan plan zaštite od požara i organizovana služba."
+      },
+      {
+        "kicker": "KATEGORIJA II",
+        "title": "Povišen rizik",
+        "text": "Plan zaštite od požara i lice zaduženo za sprovođenje."
+      },
+      {
+        "kicker": "KATEGORIJA III",
+        "title": "Izvestan rizik",
+        "text": "Pravila zaštite od požara sa planom evakuacije."
+      }
+    ],
+    "prices": [
+      { "label": "Pravila zaštite od požara sa planom evakuacije", "value": "8.000–15.000" },
+      { "label": "Elaborat zaštite od požara", "value": "od 25.000" },
+      { "label": "Plan evakuacije i uputstva u boji, po spratu", "value": "na upit" },
+      { "label": "Obuka zaposlenih iz oblasti ZOP, po radniku", "value": "2.000" }
+    ]
+  },
+  "koordinator": {
+    "licences": [
+      "LICENCA · FAZA IZRADE PROJEKTA",
+      "LICENCA · FAZA IZVOĐENJA RADOVA"
+    ],
+    "cards": [
+      {
+        "metric": "8 DANA",
+        "title": "Prijava radova",
+        "text": "Najmanje osam dana pre početka radova prijava ide inspekciji rada. Pripremamo je i predajemo za vas."
+      },
+      {
+        "metric": "> 3 DANA",
+        "title": "Elaborat o uređenju gradilišta",
+        "text": "Obavezan za radove koji traju duže od tri dana neprekidno. Izrađujemo ga i usklađujemo sa izvođačima."
+      },
+      {
+        "metric": "FAZA 1",
+        "title": "Izrada projekta",
+        "text": "Plan preventivnih mera i koordinacija projektanata, da se bezbednost ne dodaje naknadno nego ugradi u projekat."
+      },
+      {
+        "metric": "FAZA 2",
+        "title": "Izvođenje radova",
+        "text": "Koordinacija izvođača, kontrola primene mera i geotagovani fotoreporting posle svakog obilaska."
+      }
+    ]
+  },
+  "obuke": {
+    "tiers": [
+      {
+        "price": "2.000",
+        "unit": "RSD / RADNIKU",
+        "text": "Bezbedan i zdrav rad · zaštita od požara · rad na visini",
+        "dark": true
+      },
+      {
+        "price": "1.200",
+        "unit": "RSD / RADNIKU",
+        "text": "Vatrogasna brigada · čuvar ulaza u skučeni prostor · uputstva za rukovanje mašinama",
+        "dark": false
+      }
+    ],
+    "steps": [
+      {
+        "n": "01",
+        "title": "Teorija",
+        "text": "Uživo kod vas ili onlajn, sa projektorom koji donosimo.",
+        "highlight": false
+      },
+      {
+        "n": "02",
+        "title": "Praksa",
+        "text": "Na radnom mestu, sa opremom kojom zaposleni stvarno radi.",
+        "highlight": false
+      },
+      {
+        "n": "03",
+        "title": "Test",
+        "text": "Provera znanja i praktične osposobljenosti, sa ocenom.",
+        "highlight": false
+      },
+      {
+        "n": "04",
+        "title": "Evidencija",
+        "text": "Propisan obrazac, potpis zaposlenog, rok obnavljanja u našem rokovniku.",
+        "highlight": true
+      }
+    ]
+  }
+}

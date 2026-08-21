@@ -1,0 +1,33 @@
+{
+  "kanali": [
+    {
+      "kicker": "POZOVITE",
+      "text": "Najbrže. Za hitne situacije (povreda, inspekcija na vratima) zovite u bilo koje doba: ",
+      "link": { "href": "tel:+381638185587", "label": "063 81 855 87" },
+      "after": "."
+    },
+    {
+      "kicker": "PIŠITE",
+      "text": "Za ponude i dokumentaciju. Priložite matični broj firme i broj zaposlenih, ponuda stiže isti radni dan.",
+      "link": null,
+      "after": ""
+    },
+    {
+      "kicker": "DOĐITE",
+      "text": "Temerinski put 51, Klisa, Novi Sad. Na glavnom putu, nadomak rafinerije. Radno vreme pon–pet 08–16.",
+      "link": null,
+      "after": ""
+    }
+  ],
+  "foto": {
+    "placeholder": "Fotografija kancelarije ili mapa"
+  },
+  "priprema": {
+    "kicker": "UBRZAJTE PONUDU, PRIPREMITE:",
+    "stavke": [
+      "· matični broj firme",
+      "· broj zaposlenih i radnih mesta",
+      "· delatnost i adresu objekta ili gradilišta"
+    ]
+  }
+}

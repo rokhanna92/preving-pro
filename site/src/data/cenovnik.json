@@ -1,0 +1,137 @@
+{
+  "groups": [
+    {
+      "naziv": "MESEČNI PAKETI",
+      "oznaka": "G-01",
+      "stavke": [
+        {
+          "n": "Osnovni paket",
+          "d": "imenovanje savetnika, mesečni obilazak, izveštaj, evidencije",
+          "c": "od 8.200 / mes"
+        },
+        {
+          "n": "Pro paket · ključ u ruke",
+          "d": "sve iz Osnovnog + alko-testiranje, zastupanje, linija 24/7",
+          "c": "od 12.000 / mes"
+        }
+      ]
+    },
+    {
+      "naziv": "RAD PO SATU",
+      "oznaka": "G-02",
+      "stavke": [
+        {
+          "n": "Savetnik za BZR · referent ZOP · koordinator",
+          "d": "rad na vašoj lokaciji ili dokumentaciji",
+          "c": "3.200 / sat"
+        },
+        {
+          "n": "Kontrola gradilišta sa fotoreportingom",
+          "d": "geotagovane fotografije i protokol u imejlu",
+          "c": "6.400 / sat"
+        },
+        {
+          "n": "Zastupanje pred Inspekcijom rada",
+          "d": "priprema dokumentacije i prisustvo kontroli",
+          "c": "7.500 / sat"
+        }
+      ]
+    },
+    {
+      "naziv": "DOKUMENTACIJA",
+      "oznaka": "G-03",
+      "stavke": [
+        {
+          "n": "Akt o proceni rizika",
+          "d": "po radnom mestu, sa merama i rokovima",
+          "c": "4.000–7.000"
+        },
+        {
+          "n": "Pravilnik o bezbednosti i zdravlju na radu",
+          "d": "usklađen sa Zakonom 35/2023",
+          "c": "od 15.000"
+        },
+        {
+          "n": "Pravilnik o ličnoj zaštitnoj opremi",
+          "d": "sa normativima LZO po radnim mestima",
+          "c": "od 10.000"
+        },
+        {
+          "n": "Pravila zaštite od požara sa planom evakuacije",
+          "d": "za objekte III kategorije",
+          "c": "8.000–15.000"
+        },
+        {
+          "n": "Elaborat zaštite od požara",
+          "d": "za složenije objekte i tehnologije",
+          "c": "od 25.000"
+        },
+        {
+          "n": "Elaborat o uređenju gradilišta",
+          "d": "za radove duže od tri dana",
+          "c": "na upit"
+        }
+      ]
+    },
+    {
+      "naziv": "OBUKE",
+      "oznaka": "G-04",
+      "stavke": [
+        {
+          "n": "BZR, ZOP ili rad na visini",
+          "d": "teorija + praksa + test + evidencija",
+          "c": "2.000 / radniku"
+        },
+        {
+          "n": "Vatrogasna brigada · čuvar ulaza · rukovanje mašinama",
+          "d": "specijalističke obuke po potrebi posla",
+          "c": "1.200 / radniku"
+        }
+      ]
+    },
+    {
+      "naziv": "SERVIS",
+      "oznaka": "G-05",
+      "stavke": [
+        {
+          "n": "Revizija PP aparata",
+          "d": "na vašoj adresi, sa nalepnicom i zapisnikom",
+          "c": "od 250 / aparatu"
+        }
+      ]
+    }
+  ],
+  "note": "Sve cene su u dinarima, bez PDV-a. Cenovnik važi za 2026/27. i menja se objavom na ovoj strani. Za mesečne pakete cena zavisi od broja zaposlenih i delatnosti.",
+  "estimator": {
+    "defaults": { "mesta": 5, "zaposleni": 12, "lzo": true, "zop": true, "obuke": true, "pausal": "pro" },
+    "limits": { "mestaMin": 1, "mestaMax": 30, "zaposleniMin": 1, "zaposleniMax": 100 },
+    "rates": {
+      "aktPoMestu": 4000,
+      "pravilnikBzr": 15000,
+      "pravilnikLzo": 10000,
+      "pravilaZop": 8000,
+      "obukaPoRadniku": 2000,
+      "pausalOsnovni": 8200,
+      "pausalPro": 12000
+    },
+    "labels": {
+      "akt": "Akt o proceni rizika × ",
+      "pravilnikBzr": "Pravilnik o BZR",
+      "pravilnikLzo": "Pravilnik o LZO",
+      "pravilaZop": "Pravila ZOP + plan evakuacije",
+      "obukaPrefix": "Obuka × ",
+      "obukaSuffix": " zaposlenih",
+      "bezPausala": "bez paušala"
+    },
+    "pausalOpts": [
+      { "t": "Bez paušala", "id": "ne" },
+      { "t": "Osnovni", "id": "osnovni" },
+      { "t": "Pro", "id": "pro" }
+    ],
+    "checkboxes": [
+      { "id": "lzo", "label": "Pravilnik o ličnoj zaštitnoj opremi" },
+      { "id": "zop", "label": "Pravila zaštite od požara sa planom evakuacije" },
+      { "id": "obuke", "label": "Obuka svih zaposlenih (BZR ili ZOP)" }
+    ]
+  }
+}

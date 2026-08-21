@@ -1,0 +1,68 @@
+---
+import services from '../data/services.json';
+
+interface Props {
+  /** Prefix for the service anchors: '/usluge' from elsewhere, '' when already on that page. */
+  serviceHref?: string;
+  /** Fifth link in the USLUGE column, or null to leave the column at four. */
+  lastLink?: { href: string; label: string } | null;
+}
+
+const {
+  serviceHref = '/usluge',
+  lastLink = { href: '#paketi', label: 'Pro paket · ključ u ruke' },
+} = Astro.props;
+
+const updated = '21.08.2026.';
+---
+
+<footer style="position:relative; z-index:2; background:#040404; color:#F2F1EC; border-top:1px solid rgba(255,255,255,.1); padding:64px 32px 0">
+  <div style="max-width:1360px; margin:0 auto">
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:40px; padding-bottom:48px">
+      <div>
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px">
+          <span style="width:24px; height:24px; position:relative; display:block">
+            <span style="position:absolute; left:0; top:0; width:24px; height:7px; background:repeating-linear-gradient(135deg,#FFEF41 0 4px,#070707 4px 8px); border:1px solid #FFEF41; box-sizing:border-box"></span>
+            <span style="position:absolute; left:0; top:7px; width:7px; height:17px; background:#FFEF41"></span>
+            <span style="position:absolute; right:0; top:7px; width:7px; height:17px; background:#FFEF41"></span>
+          </span>
+          <span style="font:800 15px Archivo,sans-serif; color:#fff">PREVING<span style="color:#FFEF41">PRO</span></span>
+        </div>
+        <p style="margin:0; font:400 13px/1.7 Archivo,sans-serif; color:rgba(255,255,255,.5)">Preving Pro agencija za preventivni inženjering i tehničko savetovanje, Boris Sabo PR, Novi Sad<br />Temerinski put 51, Klisa, 21000 Novi Sad<br />Šifra delatnosti 7112</p>
+      </div>
+      <div>
+        <p style="margin:0 0 14px; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.2em; color:rgba(255,255,255,.4)">USLUGE</p>
+        <div style="display:grid; gap:10px; font:400 14px Archivo,sans-serif">
+          {services.map((s) => (
+            <a href={`${serviceHref}#${s.id}`} class="ftr-a" style="color:rgba(255,255,255,.75)">{s.title}</a>
+          ))}
+          {lastLink && <a href={lastLink.href} class="ftr-a" style="color:rgba(255,255,255,.75)">{lastLink.label}</a>}
+        </div>
+      </div>
+      <div>
+        <p style="margin:0 0 14px; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.2em; color:rgba(255,255,255,.4)">LICENCE</p>
+        <p style="margin:0; font:400 13px/1.8 Archivo,sans-serif; color:rgba(255,255,255,.5)">Savetnik za BZR<br />Koordinator u fazi izrade projekta<br />Koordinator u fazi izvođenja radova<br />Referent zaštite od požara<br /><span style="color:rgba(255,255,255,.35)">Inspektorat za rad · MUP RS</span></p>
+      </div>
+      <div>
+        <p style="margin:0 0 14px; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.2em; color:rgba(255,255,255,.4)">KONTAKT</p>
+        <div style="display:grid; gap:10px; font:500 13.5px 'IBM Plex Mono',monospace">
+          <a href="tel:+381638185587" class="ftr-a" style="color:#FFEF41">063 81 855 87</a>
+          <a href="mailto:boris.sabo@previngpro.rs" class="ftr-a" style="color:rgba(255,255,255,.75)">boris.sabo@previngpro.rs</a>
+          <a href="mailto:mira.lainovic@previngpro.rs" class="ftr-a" style="color:rgba(255,255,255,.75)">mira.lainovic@previngpro.rs</a>
+          <span style="color:rgba(255,255,255,.45)">pon–pet 08–16 · linija 24/7</span>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,.1); padding:20px 0 24px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px; font:400 12px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.35)">
+      <span>© 2026 Preving Pro · Politika privatnosti · Uslovi korišćenja</span>
+      <span>ЋИР / LAT · Ažurirano: {updated}</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* Own hover rules, so the footer behaves the same on dark and light pages.
+     !important is required: the base colors sit in inline style attributes,
+     which otherwise win over any stylesheet rule. */
+  .ftr-a:hover { color: #FFEF41 !important; text-decoration: none !important; }
+</style>

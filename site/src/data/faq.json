@@ -1,0 +1,32 @@
+[
+  {
+    "q": "Da li moja firma mora da ima lice za bezbednost i zdravlje na radu?",
+    "a": "Ako imate najmanje jednog zaposlenog, poslovi BZR moraju biti organizovani. U pojedinim manje rizičnim delatnostima poslodavac sa do 20 zaposlenih može sam da obavlja te poslove ako ima položen stručni ispit. U građevini, proizvodnji, skladištenju i transportu to nije moguće.",
+    "open": true
+  },
+  {
+    "q": "Kako radite ako agencija nema licencu za pravno lice?",
+    "a": "Poslove obavljamo na osnovu ličnih licenci izdatih od Inspektorata za rad i MUP-a Republike Srbije. Sa vašom firmom zaključujemo ugovor o radu na određeno radno vreme, na primer dva časa mesečno, i vi donosite akt o imenovanju našeg savetnika za BZR. Oba dokumenta ostaju u vašoj dokumentaciji.",
+    "open": false
+  },
+  {
+    "q": "Koliko traje uvođenje u sistem?",
+    "a": "Ulazni audit obavljamo u roku od nekoliko dana od poziva. Kompletna dokumentacija za malu firmu je gotova u roku od dve do tri nedelje, zavisno od broja radnih mesta.",
+    "open": false
+  },
+  {
+    "q": "Šta dobijam posle svake kontrole?",
+    "a": "Protokol o kontroli sa geotagovanim fotografijama nedostataka i konkretnim predlogom mera, u vašem imejlu, isti ili sledeći radni dan.",
+    "open": false
+  },
+  {
+    "q": "Da li obuka može onlajn?",
+    "a": "Teorijski deo obuke može, uz testiranje i evidenciju. Praktični deo se obavlja na radnom mestu. Evidencija o obučenim zaposlenima vodi se na propisanom obrascu koji potpisuje i zaposleni.",
+    "open": false
+  },
+  {
+    "q": "Dolazite li i kad nije radno vreme?",
+    "a": "Uz Pro paket dobijate telefonsku liniju 24/7 i hitan izlazak. Povreda na radu i inspekcijska kontrola ne biraju vreme.",
+    "open": false
+  }
+]

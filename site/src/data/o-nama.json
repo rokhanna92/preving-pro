@@ -1,0 +1,80 @@
+{
+  "stats": [
+    { "label": "Lične licence", "value": "4" },
+    { "label": "Godine prakse na tržištu EU", "value": "10" },
+    { "label": "Rafinerije: Slovnaft · MOL · Unipetrol · OMV · INA", "value": "5" },
+    { "label": "Ljudi koje dobijate na telefon", "value": "2" }
+  ],
+  "timeline": [
+    {
+      "tag": "NITRA · SLOVAČKA",
+      "title": "Master iz bezbednosti na radu",
+      "text": "Tehnički fakultet u Nitri: bezbednost na radu i pouzdanost tehničkih sistema. Zanat naučen tamo gde je BZR inženjerska disciplina, ne fascikla.",
+      "chips": null
+    },
+    {
+      "tag": "ABEP, NITRA · 3 GODINE",
+      "title": "Koordinator za BZR na gradilištima",
+      "text": "Tri godine koordinacije izvođača na gradilištima širom Slovačke: prijave, elaborati, kontrole i svakodnevni rad sa ljudima na terenu.",
+      "chips": null
+    },
+    {
+      "tag": "REMONTI PO EU · 7 GODINA",
+      "title": "Investicioni projekti i generalni remonti rafinerija",
+      "text": "Sedam godina na remontima, gde hiljade izvođača rade pod jednim režimom dozvola i gde se svaka greška vidi isti dan.",
+      "chips": [
+        "SLOVNAFT · BRATISLAVA",
+        "MOL · MAĐARSKA",
+        "UNIPETROL · ČEŠKA",
+        "OMV · AUSTRIJA",
+        "INA · HRVATSKA"
+      ]
+    },
+    {
+      "tag": "SRBIJA",
+      "title": "Četiri lične licence",
+      "text": "Savetnik za BZR, koordinator u fazi izrade projekta, koordinator u fazi izvođenja radova, referent zaštite od požara. Inspektorat za rad i MUP RS.",
+      "chips": null
+    },
+    {
+      "tag": "2026 · NOVI SAD",
+      "title": "Osnovan Preving Pro",
+      "text": "Boris Sabo PR, Novi Sad. Kancelarija na Temerinskom putu 51 na Klisi: na glavnom putu, nadomak rafinerije. Standard sa remonta, primenjen na male firme u Vojvodini.",
+      "chips": null
+    }
+  ],
+  "tim": [
+    {
+      "id": "foto-boris",
+      "photo": "Fotografija: Boris na terenu",
+      "name": "Boris Sabo",
+      "role": "OSNIVAČ · SAVETNIK ZA BZR · KOORDINATOR",
+      "bio": "Master bezbednosti na radu (Nitra). Tri godine koordinator u Slovačkoj, sedam godina na remontima rafinerija po EU, četiri lične licence u Srbiji. Na njega ide linija 24/7."
+    },
+    {
+      "id": "foto-mira",
+      "photo": "Fotografija: Mira u kancelariji",
+      "name": "Mira Lainović",
+      "role": "KANCELARIJA · ADMINISTRACIJA · SARADNIK ZA BZR I ZOP",
+      "bio": "Grafički tehničar, sedam godina na projektima rafinerija sa SAM Industries a.s. Vodi dokumentaciju, evidencije i komunikaciju: kod nje ništa ne kasni."
+    }
+  ],
+  "teren": [
+    {
+      "label": "OPREMA",
+      "text": "Alcovisor Mark X Plus za kontrolu alkohola sa protokolom, fotoaparat za geotagovani fotoreporting, projektor za obuke na terenu."
+    },
+    {
+      "label": "DOSTUPNOST",
+      "text": "Telefonska linija 24 časa, 7 dana u nedelji. Povreda na radu i inspekcija ne čekaju radno vreme."
+    },
+    {
+      "label": "TERITORIJA",
+      "text": "Novi Sad i okolina, opština Kovačica (Kovačica, Padina, Debeljača), cela Vojvodina po dogovoru."
+    },
+    {
+      "label": "OSNOV RADA",
+      "text": "Lične licence, akt poslodavca o imenovanju savetnika za BZR i ugovor koji ostaje u vašoj dokumentaciji."
+    }
+  ]
+}

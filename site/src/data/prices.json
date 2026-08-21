@@ -1,0 +1,47 @@
+{
+  "packages": [
+    {
+      "id": "osnovni",
+      "name": "Osnovni paket",
+      "price": "od 8.200 RSD",
+      "unit": "/ MESEČNO",
+      "badge": null,
+      "featured": false,
+      "features": [
+        "Akt o imenovanju savetnika za BZR",
+        "Obilazak radilišta jednom mesečno",
+        "Izveštaj sa geotagovanim fotografijama u imejlu",
+        "Evidencija zaposlenih, obuka i lekarskih pregleda",
+        "Obaveštavanje o rokovima i izmenama propisa"
+      ],
+      "cta": "Zatražite ponudu"
+    },
+    {
+      "id": "pro",
+      "name": "Pro paket · ključ u ruke",
+      "price": "od 12.000 RSD",
+      "unit": "/ MESEČNO",
+      "badge": "NAJTRAŽENIJI",
+      "featured": true,
+      "features": [
+        "Sve iz Osnovnog paketa",
+        "Obilazak jednom ili više puta mesečno, po potrebi",
+        "Kontrola radnika na alkohol uređajem Alcovisor Mark X Plus, uz protokol",
+        "Zastupanje pred Inspekcijom rada i izlazak na teren u slučaju povrede",
+        "Evidencija povreda, prijave, preventivne mere i Toolbox obuka posle povrede",
+        "Telefonska linija 24/7 i hitan izlazak"
+      ],
+      "cta": "Zatražite ponudu"
+    }
+  ],
+  "packagesNote": "Cena zavisi od broja zaposlenih i delatnosti. Ulazni BZR audit i izrada dokumentacije naplaćuju se posebno, po cenovniku.",
+  "items": [
+    { "label": "Akt o proceni rizika, po radnom mestu", "value": "od 4.000", "tabular": true },
+    { "label": "Pravilnik o bezbednosti i zdravlju na radu", "value": "od 15.000", "tabular": false },
+    { "label": "Obuka radnika za BZR, ZOP ili rad na visini, po radniku", "value": "2.000", "tabular": false },
+    { "label": "Pravila zaštite od požara", "value": "od 8.000", "tabular": false },
+    { "label": "Kontrola gradilišta sa fotoreportingom, po satu", "value": "6.400", "tabular": false },
+    { "label": "Revizija PP aparata, po aparatu", "value": "od 250", "tabular": false }
+  ],
+  "itemsNote": "Cene su u dinarima, bez PDV-a."
+}

@@ -1,0 +1,11 @@
+{
+  "zaposleni": ["1–5", "6–20", "21–50", "50+"],
+  "delatnost": [
+    "Građevina",
+    "Proizvodnja",
+    "Skladištenje i transport",
+    "Trgovina i usluge",
+    "Kancelarija i IT",
+    "Drugo"
+  ]
+}

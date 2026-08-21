@@ -1,0 +1,71 @@
+# x3kk - rules of engagement (AgroApp)
+
+Call me **x3kk** in every reply. No name = this file did not load = say so and stop.
+
+## How to work
+
+# Engineering & Behavioral Guidelines
+
+Follow these core principles for all code generation, architecture, reviews, and refactoring in this workspace.
+
+### 1. Talk First (Plan Before Coding)
+
+- **Explicit Go-Ahead Required:** Explain the plan in plain language and wait for explicit confirmation ("do it", "go") before touching files. Questions are never instructions to code.
+- **Red Test Exception:** Red tests and clear-repro bugs get fixed directly, no permission needed.
+- **Surface Ambiguity:** Don't assume. Call out hidden confusion, tradeoffs, or multiple interpretations upfront rather than picking one silently.
+- **Push Back:** If a simpler approach or 50-line alternative exists for a 200-line plan, propose it before writing code.
+
+### 2. Simplicity & Elegance First
+
+- **Minimal Viable Implementation:** Write the minimum code needed to solve the exact problem requested. Avoid speculative features, unnecessary configurability, or premature abstractions.
+- **Balanced Elegance:** For non-trivial changes, pause and ask: _"Knowing everything I know now, what is the clean solution?"_ For obvious fixes: just fix it, no ceremony.
+
+### 3. Surgical Changes & Scope Control
+
+- **Stay in Scope:** Fix what was asked, nothing else. Drive-by improvements and unrelated cleanups are scope creep. Propose them, do not do them.
+- **Surgical Touch:** Preserve existing code style, formatting, and structure. Clean up only the unused imports/variables created by your changes.
+- **Deferred Means Deferred:** Items marked deferred in memory are waiting on human input. Never resurrect them unprompted.
+
+### 4. Verification & Fixes
+
+- **Baseline First:** Before changing anything, run the relevant test suite and record the numbers. You cannot know what you broke if you never knew what was green.
+- **Fix Everything First:** Red checks or tests: fix ALL of them, verify green locally, then report. Never hand back a partial fix. Never ask which failure to start with.
+- **Verify Before Done:** Define verifiable success criteria upfront. Run the suite and show the numbers. _"Should work"_ is not done. Ask yourself: _Would a staff engineer sign off on this?_
+
+### 5. Execution & Learning
+
+- **Blocked Means Say Blocked:** Name the exact missing input as one clear question (never a questionnaire). Never fill gaps with guesses.
+- **Break Down Tasks:** Divide multi-step work into clear steps, verifying each stage before proceeding to the next.
+- **Learn From Corrections:** Every time you are corrected, write the lesson to project memory before moving on. The same mistake twice is a process failure.
+
+## Writing
+
+- Em dashes: **never**. Anywhere. Chat, code, comments, commits, docs, UI copy. Use " - ", a comma, or rephrase.
+- Plain and direct. No filler, no marketing tone.
+- Reports: outcome first, then numbers, then detail.
+- App UI copy is Serbian; match it, diacritics included.
+
+## Git
+
+- **Never push.** I push. Never touch the remote in any way.
+- **Commit every change you make.** Finish it, verify it, commit it. No asking, no green light, no handing me a dirty tree to sort out. Pushing is still mine alone.
+- **Stage only the files you touched.** My tree carries stray untracked junk. `git add -A` and `git commit -a` are banned; name the paths.
+- **Commit messages: one short line, lowercase, plain.** What changed, and why only if it is not obvious. No em dashes anywhere. No `Co-Authored-By`, no `Generated with`, no signature, no emoji, no body unless the change genuinely needs one.
+- **If the commit adds or removes a file, `git add` it and run `pnpm map:generate` before committing.** The map is a tracked CI gate and a new file reds it. Routine commits make this a routine trap.
+- This repo is one worktree on `master`. No other branches or worktrees.
+- Work on `master` directly. Branch only for multi-day work, merge back within days.
+- Migrations: author against current `master`, apply the same day. Never let two
+  branches hold unapplied migrations - that is what caused the 2026-07-27 drift.
+- Never push. I push. ← restore this; it was lifted for one session
+
+## Serena (code intelligence)
+
+Serena is this repo's LSP index, wired in `.mcp.json`, configured in `.serena/project.yml`. It is **read-only on purpose**: its editing tools write to disk without passing the deny rules in `.claude/settings.local.json`, which are the only thing standing between an agent and `wizards/**` or `math.ts`. Reads go through Serena, writes go through Edit/Write. That split is the guardrail, not a preference.
+
+- **Symbol before file.** `get_symbols_overview` to see what a file holds, `find_symbol` to pull one definition. Reading 3000 lines to look at one function is the exact waste this tool exists to end.
+- **`find_referencing_symbols` before you touch any exported signature.** grep finds the string, the LSP finds the callers. Those are different sets, and the difference is what breaks the build.
+- **grep and glob stay legal** for things that are not symbols: UI copy, tokens, migration SQL, config keys. Do not launder those through Serena to look obedient.
+- **`get_diagnostics_for_file` is a smoke test, not a verdict.** It does not replace `pnpm typecheck` before you claim done.
+- **Frozen stays frozen.** Serena reads `wizards/**` and `math.ts`. Read-only tooling is not a loophole in the ban, it is why the ban still holds.
+- **No `.serena/memories/`.** Memory tools are off. Project state lives in Claude's memory dir behind `MEMORY.md` and stays the only copy. Two logbooks means one of them is lying.
+- **A stale index answers wrong, not empty.** After renames or a big refactor, run `serena project index`. Symbol you know exists comes back missing: suspect the index before the code.

@@ -1,0 +1,256 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import kontakt from '../data/kontakt.json';
+import formOptions from '../data/form-options.json';
+
+const { kanali, foto, priprema } = kontakt;
+
+// Sat i status kancelarije po beogradskom vremenu, isto kao u klijentskoj skripti.
+function belgrade(now: Date) {
+  let clock = '--:--:--';
+  let statusA = 'RADNO VREME 08–16';
+  try {
+    clock = now.toLocaleTimeString('sr-Latn-RS', { timeZone: 'Europe/Belgrade', hour12: false });
+    const h = +now.toLocaleString('en-GB', { timeZone: 'Europe/Belgrade', hour: '2-digit', hour12: false });
+    const wd = now.toLocaleDateString('en-US', { timeZone: 'Europe/Belgrade', weekday: 'short' });
+    const open = h >= 8 && h < 16 && wd !== 'Sat' && wd !== 'Sun';
+    statusA = open ? 'KANCELARIJA OTVORENA · 08–16' : 'KANCELARIJA ZATVORENA · DEŽURSTVO';
+  } catch (e) {
+    /* ostaje rezervna vrednost */
+  }
+  return { clock, statusA };
+}
+
+const initial = belgrade(new Date());
+
+const title = 'Kontakt · Preving Pro';
+const description =
+  'Javite se: 063 81 855 87, Temerinski put 51, Klisa, Novi Sad. Odgovaramo isti radni dan, linija 24/7 za hitne situacije.';
+---
+
+<!doctype html>
+<html lang="sr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400..900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
+    />
+    <style is:global>
+      html{scroll-behavior:smooth}
+      body{margin:0;background:#040404;font-family:Archivo,system-ui,sans-serif;color:#F2F1EC;-webkit-font-smoothing:antialiased;text-wrap:pretty}
+      a{color:#F2F1EC;text-decoration:none}
+      a:hover{color:#FFEF41}
+      ::selection{background:#FFEF41;color:#070707}
+      @keyframes blink{0%,45%{opacity:1}50%,95%{opacity:.12}100%{opacity:1}}
+      @keyframes sweep{to{transform:rotate(360deg)}}
+      [data-fd]{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+      .fd-on{opacity:1 !important;transform:none !important}
+      input,select,textarea{font-family:Archivo,system-ui,sans-serif}
+      @media (prefers-reduced-motion:reduce){[data-fd]{opacity:1;transform:none;transition:none}.rdr-sweep{animation:none !important}}
+
+      [hidden]{display:none !important}
+      /* !important je obavezan: osnovne vrednosti su u inline style atributima,
+         koji inače pobeđuju svako pravilo iz stilova. */
+      .btn-dark:hover{background:#1c1c1c !important}
+      .field:focus{border-color:#070707 !important;box-shadow:0 0 0 2px #FFEF41 !important}
+
+      /* Mesto za fotografiju kancelarije ili mapu. Zamenite <img> tagom kad slika stigne. */
+      .img-slot{display:block;position:relative;font:13px/1.3 system-ui,-apple-system,sans-serif;width:100%;height:100%;aspect-ratio:3/2}
+      .img-slot-frame{position:absolute;inset:0;overflow:hidden;background:rgba(127,127,127,.08)}
+      .img-slot-ring{position:absolute;inset:0;pointer-events:none;border:1.5px dashed currentColor;opacity:.35}
+      .img-slot-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:12px;box-sizing:border-box}
+      .img-slot-empty svg{opacity:.45}
+      .img-slot-cap{max-width:90%;font-weight:500;letter-spacing:.01em;opacity:.75}
+    </style>
+  </head>
+  <body>
+    <div id="pg-kontakt">
+      <Header variant="inner" active="/kontakt" cta="#upit" />
+
+      <section style="background:#040404; padding:88px 32px 80px">
+        <div style="max-width:1360px; margin:0 auto; display:flex; flex-wrap:wrap; gap:56px; align-items:center">
+          <div style="flex:1 1 520px; min-width:0">
+            <p style="margin:0 0 20px; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.2em"><a href="/" style="color:rgba(255,255,255,.45)">POČETNA</a> / <span style="color:#FFEF41">KONTAKT</span></p>
+            <h1 style="margin:0; font:800 clamp(38px,4.6vw,68px)/1 Archivo,sans-serif; letter-spacing:-.035em; color:#fff; max-width:16ch">Javite se. Odgovaramo isti radni dan.</h1>
+            <div style="display:grid; gap:14px; margin-top:32px; font:500 15px 'IBM Plex Mono',monospace">
+              <a href="tel:+381638185587" style="font:700 clamp(26px,3vw,40px) 'IBM Plex Mono',monospace; color:#FFEF41; letter-spacing:.01em">063 81 855 87</a>
+              <a href="mailto:boris.sabo@previngpro.rs" style="color:rgba(255,255,255,.8)">boris.sabo@previngpro.rs</a>
+              <a href="mailto:mira.lainovic@previngpro.rs" style="color:rgba(255,255,255,.8)">mira.lainovic@previngpro.rs</a>
+              <span style="color:rgba(255,255,255,.5)">Temerinski put 51, Klisa · 21000 Novi Sad</span>
+            </div>
+          </div>
+          <div style="flex:0 1 340px; min-width:300px; display:flex; flex-direction:column; align-items:center; gap:18px">
+            <div style="position:relative; width:250px; height:250px; border-radius:50%; border:1px solid rgba(255,239,65,.35); overflow:hidden; background:radial-gradient(circle,rgba(255,239,65,.06),transparent 72%)">
+              <div style="position:absolute; inset:16%; border:1px solid rgba(255,239,65,.2); border-radius:50%"></div>
+              <div style="position:absolute; inset:33%; border:1px solid rgba(255,239,65,.16); border-radius:50%"></div>
+              <div style="position:absolute; left:50%; top:0; bottom:0; width:1px; background:rgba(255,239,65,.12)"></div>
+              <div style="position:absolute; top:50%; left:0; right:0; height:1px; background:rgba(255,239,65,.12)"></div>
+              <div class="rdr-sweep" style="position:absolute; inset:0; border-radius:50%; background:conic-gradient(from 0deg, rgba(255,239,65,.45), rgba(255,239,65,.06) 62deg, transparent 90deg 360deg); animation:sweep 3.4s linear infinite"></div>
+              <span style="position:absolute; left:63%; top:29%; width:6px; height:6px; border-radius:50%; background:#FFEF41; animation:blink 2.1s steps(1,end) infinite"></span>
+              <span style="position:absolute; left:31%; top:56%; width:6px; height:6px; border-radius:50%; background:#FFEF41; animation:blink 2.7s steps(1,end) .6s infinite"></span>
+              <span style="position:absolute; left:68%; top:66%; width:6px; height:6px; border-radius:50%; background:#FFEF41; animation:blink 1.9s steps(1,end) 1.1s infinite"></span>
+              <span style="position:absolute; left:50%; top:50%; width:8px; height:8px; margin:-4px 0 0 -4px; border-radius:50%; background:#FFEF41"></span>
+            </div>
+            <div style="text-align:center">
+              <p id="rdr-clock" style="margin:0; font:700 26px 'IBM Plex Mono',monospace; color:#fff; font-variant-numeric:tabular-nums">{initial.clock}</p>
+              <p style="margin:6px 0 0; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.18em; color:rgba(255,255,255,.5)">NOVI SAD · <span id="rdr-status">{initial.statusA}</span></p>
+              <p style="margin:6px 0 0; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.18em; color:#FFEF41; display:flex; align-items:center; justify-content:center; gap:7px"><span style="width:6px; height:6px; border-radius:50%; background:#FFEF41; animation:blink 1.8s steps(1,end) infinite"></span>LINIJA 24/7 AKTIVNA</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="background:#070707; border-top:1px solid rgba(255,255,255,.09); padding:72px 32px">
+        <div style="max-width:1360px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px">
+          {kanali.map((k, i) => (
+            <div data-fd style={`border:1px solid rgba(255,255,255,.14); padding:24px${i === 0 ? '' : `; transition-delay:${(i * 6) / 100}s`}`}>
+              <p style="margin:0 0 10px; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.18em; color:#FFEF41">{k.kicker}</p>
+              <p style="margin:0; font:400 14.5px/1.6 Archivo,sans-serif; color:rgba(255,255,255,.72)">{k.text}{k.link && <a href={k.link.href} style="color:#FFEF41; text-decoration:underline; text-underline-offset:3px">{k.link.label}</a>}{k.after}</p>
+            </div>
+          ))}
+          <div data-fd style="position:relative; min-height:180px; transition-delay:.18s">
+            <div class="img-slot" role="img" aria-label={foto.placeholder}>
+              <div class="img-slot-frame"></div>
+              <div class="img-slot-ring"></div>
+              <div class="img-slot-empty">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="m21 15-5-5L5 21"></path></svg>
+                <div class="img-slot-cap">{foto.placeholder}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="upit" style="background:#EFEDE6; color:#070707; padding:88px 32px 96px">
+        <div style="max-width:1360px; margin:0 auto; display:flex; flex-wrap:wrap; gap:56px">
+          <div style="flex:0 1 380px">
+            <p style="margin:0 0 12px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:rgba(7,7,7,.45)">UPIT / FORMULAR</p>
+            <h2 style="margin:0 0 16px; font:800 clamp(30px,3.4vw,46px)/1.05 Archivo,sans-serif; letter-spacing:-.03em">Zatražite ponudu</h2>
+            <p style="margin:0 0 26px; font:400 16px/1.6 Archivo,sans-serif; color:rgba(7,7,7,.65)">Šest polja, minut posla. Odgovor stiže isti radni dan, sa konkretnim cenama.</p>
+            <div style="background:#fff; border:1px solid rgba(7,7,7,.15); padding:20px 22px">
+              <p style="margin:0 0 10px; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.18em; color:rgba(7,7,7,.5)">{priprema.kicker}</p>
+              <p style="margin:0; font:400 14px/1.8 Archivo,sans-serif; color:rgba(7,7,7,.7)">{priprema.stavke.map((s, i) => (<>{i > 0 && <br />}{s}</>))}</p>
+            </div>
+          </div>
+          <div style="flex:1 1 560px; min-width:0">
+            <div id="pp-form">
+              <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px">
+                <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(7,7,7,.55)">IME I PREZIME
+                  <input type="text" autocomplete="name" class="field" style="background:#fff; border:1px solid rgba(7,7,7,.3); color:#070707; font-size:15px; padding:14px; outline:none" />
+                </label>
+                <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(7,7,7,.55)">NAZIV FIRME
+                  <input type="text" autocomplete="organization" class="field" style="background:#fff; border:1px solid rgba(7,7,7,.3); color:#070707; font-size:15px; padding:14px; outline:none" />
+                </label>
+                <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(7,7,7,.55)">TELEFON ILI IMEJL
+                  <input type="text" inputmode="email" class="field" style="background:#fff; border:1px solid rgba(7,7,7,.3); color:#070707; font-size:15px; padding:14px; outline:none" />
+                </label>
+                <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(7,7,7,.55)">BROJ ZAPOSLENIH
+                  <select class="field" style="background:#fff; border:1px solid rgba(7,7,7,.3); color:#070707; font-size:15px; padding:14px 10px; outline:none">
+                    {formOptions.zaposleni.map((o) => (<option>{o}</option>))}
+                  </select>
+                </label>
+                <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(7,7,7,.55); grid-column:1/-1">DELATNOST
+                  <select class="field" style="background:#fff; border:1px solid rgba(7,7,7,.3); color:#070707; font-size:15px; padding:14px 10px; outline:none">
+                    {formOptions.delatnost.map((o) => (<option>{o}</option>))}
+                  </select>
+                </label>
+                <label style="display:grid; gap:7px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(7,7,7,.55); grid-column:1/-1">PORUKA (OPCIONO)
+                  <textarea rows="3" class="field" style="background:#fff; border:1px solid rgba(7,7,7,.3); color:#070707; font-size:15px; padding:14px; outline:none; resize:vertical"></textarea>
+                </label>
+              </div>
+              <label style="display:flex; gap:12px; align-items:flex-start; margin-top:20px; font:400 13.5px/1.55 Archivo,sans-serif; color:rgba(7,7,7,.65); cursor:pointer">
+                <input type="checkbox" id="pp-consent" style="width:18px; height:18px; margin-top:2px; accent-color:#070707; flex:none" />
+                <span>Slažem se da Preving Pro obradi moje podatke radi odgovora na ovaj upit, u skladu sa Politikom privatnosti.</span>
+              </label>
+              <p id="pp-need-consent" hidden style="margin:12px 0 0; font:500 13px 'IBM Plex Mono',monospace; color:#070707; background:#FFEF41; display:inline-block; padding:8px 12px">Označite saglasnost da bismo mogli da odgovorimo na upit.</p>
+              <div><button type="button" id="pp-submit" class="btn-dark" style="margin-top:24px; background:#070707; color:#FFEF41; border:none; font:700 15px Archivo,sans-serif; padding:16px 34px; cursor:pointer">Pošaljite upit →</button></div>
+            </div>
+            <div id="pp-sent" hidden style="background:#070707; color:#F2F1EC; padding:40px">
+              <p style="margin:0; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.2em; color:#FFEF41">UPIT PRIMLJEN</p>
+              <p style="margin:14px 0 10px; font:800 28px Archivo,sans-serif; color:#fff; letter-spacing:-.02em">Primili smo vaš upit.</p>
+              <p style="margin:0; font:400 15.5px/1.6 Archivo,sans-serif; color:rgba(255,255,255,.7)">Javljamo se isti radni dan. Ako je hitno: <a href="tel:+381638185587" style="color:#FFEF41; text-decoration:underline; text-underline-offset:3px">063 81 855 87</a>.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Footer serviceHref="/usluge" lastLink={{ href: '/cenovnik', label: 'Cenovnik 2026/27' }} />
+    </div>
+
+    <script>
+      // Sat, status kancelarije i odbrojavanje, sve na jednoj sekundi.
+      const target = Date.parse('2027-01-01T00:00:00+01:00');
+      const clockBox = document.getElementById('rdr-clock');
+      const statusBox = document.getElementById('rdr-status');
+      const dayBoxes = document.querySelectorAll<HTMLElement>('[data-cd="days"]');
+
+      const tick = () => {
+        const now = new Date();
+        let clock = '--:--:--';
+        let statusA = 'RADNO VREME 08–16';
+        try {
+          clock = now.toLocaleTimeString('sr-Latn-RS', { timeZone: 'Europe/Belgrade', hour12: false });
+          const h = +now.toLocaleString('en-GB', { timeZone: 'Europe/Belgrade', hour: '2-digit', hour12: false });
+          const wd = now.toLocaleDateString('en-US', { timeZone: 'Europe/Belgrade', weekday: 'short' });
+          const open = h >= 8 && h < 16 && wd !== 'Sat' && wd !== 'Sun';
+          statusA = open ? 'KANCELARIJA OTVORENA · 08–16' : 'KANCELARIJA ZATVORENA · DEŽURSTVO';
+        } catch (e) {
+          /* ostaje rezervna vrednost */
+        }
+        if (clockBox && clockBox.textContent !== clock) clockBox.textContent = clock;
+        if (statusBox && statusBox.textContent !== statusA) statusBox.textContent = statusA;
+        const days = String(Math.max(0, Math.floor((target - now.getTime()) / 864e5)));
+        dayBoxes.forEach((el) => {
+          if (el.textContent !== days) el.textContent = days;
+        });
+      };
+      tick();
+      setInterval(tick, 1000);
+
+      // Kontakt forma.
+      const consent = document.getElementById('pp-consent') as HTMLInputElement | null;
+      const needConsent = document.getElementById('pp-need-consent');
+      const formBox = document.getElementById('pp-form');
+      const sentBox = document.getElementById('pp-sent');
+      consent?.addEventListener('change', () => {
+        if (needConsent) needConsent.hidden = true;
+      });
+      document.getElementById('pp-submit')?.addEventListener('click', () => {
+        if (consent?.checked) {
+          if (formBox) formBox.hidden = true;
+          if (sentBox) sentBox.hidden = false;
+        } else if (needConsent) {
+          needConsent.hidden = false;
+        }
+      });
+
+      // Fade-up za kartice kanala.
+      const fade = document.querySelectorAll<HTMLElement>('[data-fd]');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries, obs) =>
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add('fd-on');
+                obs.unobserve(e.target);
+              }
+            }),
+          { threshold: 0.1 }
+        );
+        fade.forEach((el) => io.observe(el));
+      } else {
+        fade.forEach((el) => el.classList.add('fd-on'));
+      }
+    </script>
+  </body>
+</html>

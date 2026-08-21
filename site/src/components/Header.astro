@@ -1,0 +1,96 @@
+---
+interface Props {
+  /** 'home' is the one-page nav with the script switch, 'inner' is the site-wide nav. */
+  variant?: 'home' | 'inner';
+  /** href of the nav item to mark as current. */
+  active?: string;
+  showBanner?: boolean;
+  /** Banner tone: yellow on dark pages, dark on the light cenovnik page. */
+  banner?: 'yellow' | 'dark';
+  /** Overrides the CTA target, e.g. an in-page anchor on the kontakt page. */
+  cta?: string;
+}
+
+const { variant = 'home', active = '', showBanner = true, banner = 'yellow', cta } = Astro.props;
+const inner = variant === 'inner';
+const darkBanner = banner === 'dark';
+
+const homeNav = [
+  { n: '01', label: 'Usluge', href: '/usluge' },
+  { n: '02', label: 'Rokovi', href: '#rokovi' },
+  { n: '03', label: 'Paketi', href: '#paketi' },
+  { n: '04', label: 'Cenovnik', href: '/cenovnik' },
+  { n: '05', label: 'O nama', href: '/o-nama' },
+  { n: '06', label: 'FAQ', href: '#faq' },
+];
+
+const innerNav = [
+  { n: '00', label: 'Početna', href: '/' },
+  { n: '01', label: 'Usluge', href: '/usluge' },
+  { n: '02', label: 'Cenovnik', href: '/cenovnik' },
+  { n: '03', label: 'O nama', href: '/o-nama' },
+  { n: '04', label: 'Kontakt', href: '/kontakt' },
+];
+
+const nav = inner ? innerNav : homeNav;
+const bannerHref = inner ? '/#provera' : '#provera';
+const logoHref = inner ? '/' : '#pp-root';
+const ctaHref = cta ?? (inner ? '/kontakt' : '#kontakt');
+const navStyle = inner
+  ? "display:flex; gap:26px; flex-wrap:wrap; justify-content:center; font:500 12.5px 'IBM Plex Mono',monospace"
+  : "display:flex; gap:26px; flex-wrap:wrap; justify-content:center; font:500 12.5px 'IBM Plex Mono',monospace; letter-spacing:.02em";
+const bannerStyle = darkBanner
+  ? 'background:#070707; color:#FFEF41; display:flex; align-items:center; justify-content:center; gap:20px; flex-wrap:wrap; padding:9px 20px; text-align:center'
+  : 'background:#FFEF41; color:#070707; display:flex; align-items:center; justify-content:center; gap:20px; flex-wrap:wrap; padding:9px 20px; text-align:center';
+const bannerLinkStyle = darkBanner
+  ? "font:700 11.5px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.75); text-decoration:underline; text-underline-offset:3px"
+  : "font:700 11.5px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:#070707; text-decoration:underline; text-underline-offset:3px";
+
+// 1. januar 2027. u 00:00 po srednjoevropskom vremenu.
+const target = Date.parse('2027-01-01T00:00:00+01:00');
+const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
+---
+
+{showBanner && (
+<div style={bannerStyle}>
+  <span style="font:600 11.5px 'IBM Plex Mono',monospace; letter-spacing:.14em">ČETIRI NOVA PRAVILNIKA SE PRIMENJUJU OD 01.01.2027. · JOŠ <span data-cd="days">{days}</span> DANA</span>
+  <a href={bannerHref} style={bannerLinkStyle}>PROVERITE OBAVEZE →</a>
+</div>
+)}
+
+<div style="position:sticky; top:0; z-index:60; background:rgba(4,4,4,.92); backdrop-filter:blur(10px); border-bottom:1px solid rgba(255,239,65,.16)">
+  <div style="max-width:1360px; margin:0 auto; padding:0 32px; height:64px; display:flex; align-items:center; justify-content:space-between; gap:24px">
+    <a href={logoHref} class="hdr-logo" style="display:flex; align-items:center; gap:11px; flex:none; color:#fff">
+      <span style="width:28px; height:28px; position:relative; display:block">
+        <span style="position:absolute; left:0; top:0; width:28px; height:8px; background:repeating-linear-gradient(135deg,#FFEF41 0 4px,#070707 4px 8px); border:1px solid #FFEF41; box-sizing:border-box"></span>
+        <span style="position:absolute; left:0; top:8px; width:8px; height:20px; background:#FFEF41"></span>
+        <span style="position:absolute; right:0; top:8px; width:8px; height:20px; background:#FFEF41"></span>
+      </span>
+      <span style="font:800 16.5px Archivo,sans-serif; color:#fff; letter-spacing:-.01em">PREVING<span style="color:#FFEF41">PRO</span></span>
+    </a>
+    <nav style={navStyle}>
+      {nav.map((item) => (
+        <a href={item.href} class="hdr-a" style={item.href === active ? 'color:#FFEF41' : 'color:rgba(255,255,255,.75)'}><span style="color:rgba(255,239,65,.6)">{item.n}</span> {item.label}</a>
+      ))}
+    </nav>
+    <div style="display:flex; align-items:center; gap:16px; flex:none">
+      {!inner && (
+        <span style="display:flex; align-items:center; gap:5px; font:500 11px 'IBM Plex Mono',monospace">
+          <button type="button" data-script-btn="cir" style="all:unset; cursor:pointer; padding:12px 2px; color:rgba(255,255,255,.5)">ЋИР</button>
+          <span style="color:rgba(255,255,255,.3)">/</span>
+          <button type="button" data-script-btn="lat" style="all:unset; cursor:pointer; padding:12px 2px; color:#FFEF41; text-decoration:underline; text-underline-offset:4px">LAT</button>
+        </span>
+      )}
+      <a href={ctaHref} class="hdr-cta" style="background:#FFEF41; color:#070707; font:700 13px Archivo,sans-serif; padding:11px 18px; flex:none">Zatražite ponudu</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Own hover rules, so the bar behaves the same on dark and light pages.
+     !important is required: the base colors sit in inline style attributes,
+     which otherwise win over any stylesheet rule. */
+  .hdr-a:hover { color: #FFEF41 !important; text-decoration: none !important; }
+  .hdr-logo:hover { text-decoration: none !important; }
+  .hdr-cta:hover { background: #fff !important; color: #070707 !important; text-decoration: none !important; }
+</style>

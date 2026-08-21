@@ -1,0 +1,6 @@
+# KDE folder view settings
+.directory
+
+# OS junk
+.DS_Store
+Thumbs.db

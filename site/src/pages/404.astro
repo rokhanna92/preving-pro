@@ -1,0 +1,83 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const links = [
+  { href: '/', n: '00', label: 'Početna' },
+  { href: '/usluge', n: '01', label: 'Usluge' },
+  { href: '/cenovnik', n: '02', label: 'Cenovnik' },
+  { href: '/o-nama', n: '03', label: 'O nama' },
+  { href: '/kontakt', n: '04', label: 'Kontakt' },
+];
+
+const title = 'Strana nije pronađena · Preving Pro';
+---
+
+<!doctype html>
+<html lang="sr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="robots" content="noindex" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400..900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
+    />
+    <style is:global>
+      html{scroll-behavior:smooth}
+      body{margin:0;background:#040404;font-family:Archivo,system-ui,sans-serif;color:#F2F1EC;-webkit-font-smoothing:antialiased;text-wrap:pretty}
+      a{color:#F2F1EC;text-decoration:none}
+      a:hover{color:#FFEF41}
+      ::selection{background:#FFEF41;color:#070707}
+      @keyframes blink{0%,45%{opacity:1}50%,95%{opacity:.12}100%{opacity:1}}
+
+      /* !important je obavezan: osnovne boje su u inline style atributima,
+         koji inače pobeđuju svako pravilo iz stilova. */
+      .chip-link:hover{border-color:#FFEF41 !important;color:#FFEF41 !important}
+      .btn-y:hover{background:#fff !important;color:#070707 !important}
+    </style>
+  </head>
+  <body>
+    <div id="pg-404">
+      <Header variant="inner" />
+
+      <section style="background:#040404; padding:96px 32px 104px; position:relative; overflow:hidden">
+        <div style="position:absolute; inset:0; background-image:linear-gradient(rgba(255,239,65,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,239,65,.04) 1px,transparent 1px); background-size:56px 56px; pointer-events:none"></div>
+        <div style="max-width:1360px; margin:0 auto; position:relative">
+          <p style="margin:0 0 20px; font:500 11.5px 'IBM Plex Mono',monospace; color:#FFEF41; letter-spacing:.22em; display:flex; align-items:center; gap:9px"><span style="width:6px; height:6px; border-radius:50%; background:#FFEF41; animation:blink 1.8s steps(1,end) infinite"></span>GREŠKA 404 · STRANA NIJE PRONAĐENA</p>
+          <h1 style="margin:0; font:800 clamp(52px,8vw,120px)/0.95 Archivo,sans-serif; letter-spacing:-.04em; color:#FFEF41">404</h1>
+          <p style="margin:22px 0 0; font:800 clamp(26px,3vw,40px)/1.1 Archivo,sans-serif; letter-spacing:-.03em; color:#fff; max-width:20ch">Ova strana ne postoji.</p>
+          <p style="margin:18px 0 0; font:400 17px/1.55 Archivo,sans-serif; color:rgba(255,255,255,.68); max-width:56ch">Link je možda zastareo ili je adresa pogrešno otkucana. Ispod su sve strane sajta. Ako tražite nešto konkretno, pozovite nas i kažemo vam odmah.</p>
+
+          <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:36px">
+            {links.map((l) => (
+              <a href={l.href} class="chip-link" style="border:1px solid rgba(255,255,255,.3); font:600 12.5px 'IBM Plex Mono',monospace; padding:11px 16px; color:rgba(255,255,255,.85)"><span style="color:rgba(255,239,65,.6)">{l.n}</span> {l.label}</a>
+            ))}
+          </div>
+
+          <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:36px; align-items:center">
+            <a href="/kontakt" class="btn-y" style="background:#FFEF41; color:#070707; font:700 14.5px Archivo,sans-serif; padding:15px 26px">Zatražite ponudu</a>
+            <a href="tel:+381638185587" style="font:700 clamp(20px,2.4vw,28px) 'IBM Plex Mono',monospace; color:#FFEF41; letter-spacing:.01em; margin-left:8px">063 81 855 87</a>
+          </div>
+        </div>
+      </section>
+
+      <Footer serviceHref="/usluge" lastLink={{ href: '/cenovnik', label: 'Cenovnik 2026/27' }} />
+    </div>
+
+    <script>
+      // Odbrojavanje u traci, isto kao na ostalim stranama.
+      const target = Date.parse('2027-01-01T00:00:00+01:00');
+      const days = String(Math.max(0, Math.floor((target - Date.now()) / 864e5)));
+      document.querySelectorAll<HTMLElement>('[data-cd="days"]').forEach((el) => {
+        if (el.textContent !== days) el.textContent = days;
+      });
+    </script>
+  </body>
+</html>

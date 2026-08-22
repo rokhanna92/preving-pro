@@ -92,15 +92,11 @@ const description =
         font:900 196px Archivo,sans-serif; letter-spacing:-.04em;
         white-space:nowrap;
         pointer-events:none; user-select:none;
-        /* Iznad pozadina sekcija (koje su z-index auto/1) da natpis ne nestane
-           na tamnim delovima strane, ali ispod lepljive trake (60). */
-        z-index:3;
+        /* Ispod pozadina sekcija: tamne sekcije ga sakriju, pa se vidi samo
+           na svetlom telu strane. */
+        z-index:0;
         will-change:transform;
-        /* Natpis putuje preko tamnog zaglavlja i svetlog tela strane.
-           difference sa belom daje isti kontrast na obe podloge: na svetloj
-           potamni, na tamnoj posvetli, pa se ceo natpis vidi dok klizi. */
-        color:rgba(255,255,255,.104);
-        mix-blend-mode:difference;
+        color:rgba(7,7,7,.104);
       }
       /* Iznad 1510px staje u prazninu desno od kontejnera, pa se centrira
          izmedu ivice kontejnera (50% + 540px) i ivice prozora. */

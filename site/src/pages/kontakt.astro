@@ -44,11 +44,11 @@ const description =
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400..900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
     />
     <style is:global>
       html{scroll-behavior:smooth}
-      body{margin:0;background:#040404;font-family:Archivo,system-ui,sans-serif;color:#F2F1EC;-webkit-font-smoothing:antialiased;text-wrap:pretty}
+      body{margin:0;background:#040404;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#F2F1EC;-webkit-font-smoothing:antialiased;text-wrap:pretty}
       a{color:#F2F1EC;text-decoration:none}
       a:hover{color:#FECB0F}
       ::selection{background:#FECB0F;color:#070707}
@@ -56,7 +56,7 @@ const description =
       @keyframes sweep{to{transform:rotate(360deg)}}
       [data-fd]{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
       .fd-on{opacity:1 !important;transform:none !important}
-      input,select,textarea{font-family:Archivo,system-ui,sans-serif}
+      input,select,textarea{font-family:'IBM Plex Sans',system-ui,sans-serif}
       @media (prefers-reduced-motion:reduce){[data-fd]{opacity:1;transform:none;transition:none}.rdr-sweep{animation:none !important}}
 
       [hidden]{display:none !important}
@@ -66,7 +66,7 @@ const description =
       .field:focus{border-color:#070707 !important;box-shadow:0 0 0 2px #FECB0F !important}
 
       /* Mesto za fotografiju kancelarije ili mapu. Zamenite <img> tagom kad slika stigne. */
-      .img-slot{display:block;position:relative;font:13px/1.3 system-ui,-apple-system,sans-serif;width:100%;height:100%;aspect-ratio:3/2}
+      .img-slot{display:block;position:relative;font:13px/1.3 'IBM Plex Sans',system-ui,sans-serif;width:100%;height:100%;aspect-ratio:3/2}
       .img-slot-frame{position:absolute;inset:0;overflow:hidden;background:rgba(127,127,127,.08)}
       .img-slot-ring{position:absolute;inset:0;pointer-events:none;border:1.5px dashed currentColor;opacity:.35}
       .img-slot-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:12px;box-sizing:border-box}
@@ -82,7 +82,7 @@ const description =
         <div style="max-width:1360px; margin:0 auto; display:flex; flex-wrap:wrap; gap:56px; align-items:center">
           <div style="flex:1 1 520px; min-width:0">
             <p style="margin:0 0 20px; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.2em"><a href="/" style="color:rgba(255,255,255,.45)">POČETNA</a> / <span style="color:#FECB0F">KONTAKT</span></p>
-            <h1 style="margin:0; font:800 clamp(38px,4.6vw,68px)/1 Archivo,sans-serif; letter-spacing:-.035em; color:#fff; max-width:16ch">Javite se. Odgovaramo isti radni dan.</h1>
+            <h1 style="margin:0; font:700 clamp(38px,4.6vw,68px)/1 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.035em; color:#fff; max-width:16ch">Javite se. Odgovaramo isti radni dan.</h1>
             <div style="display:grid; gap:14px; margin-top:32px; font:500 15px 'IBM Plex Mono',monospace">
               <a href="tel:+381638185587" style="font:700 clamp(26px,3vw,40px) 'IBM Plex Mono',monospace; color:#FECB0F; letter-spacing:.01em">063 81 855 87</a>
               <a href="mailto:boris.sabo@previngpro.rs" style="color:rgba(255,255,255,.8)">boris.sabo@previngpro.rs</a>
@@ -116,7 +116,7 @@ const description =
           {kanali.map((k, i) => (
             <div data-fd style={`border:1px solid rgba(255,255,255,.14); padding:24px${i === 0 ? '' : `; transition-delay:${(i * 6) / 100}s`}`}>
               <p style="margin:0 0 10px; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.18em; color:#FECB0F">{k.kicker}</p>
-              <p style="margin:0; font:400 14.5px/1.6 Archivo,sans-serif; color:rgba(255,255,255,.72)">{k.text}{k.link && <a href={k.link.href} style="color:#FECB0F; text-decoration:underline; text-underline-offset:3px">{k.link.label}</a>}{k.after}</p>
+              <p style="margin:0; font:400 14.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.72)">{k.text}{k.link && <a href={k.link.href} style="color:#FECB0F; text-decoration:underline; text-underline-offset:3px">{k.link.label}</a>}{k.after}</p>
             </div>
           ))}
           <div data-fd style="position:relative; min-height:180px; transition-delay:.18s">
@@ -136,11 +136,11 @@ const description =
         <div style="max-width:1360px; margin:0 auto; display:flex; flex-wrap:wrap; gap:56px">
           <div style="flex:0 1 380px">
             <p style="margin:0 0 12px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:rgba(7,7,7,.45)">UPIT / FORMULAR</p>
-            <h2 style="margin:0 0 16px; font:800 clamp(30px,3.4vw,46px)/1.05 Archivo,sans-serif; letter-spacing:-.03em">Zatražite ponudu</h2>
-            <p style="margin:0 0 26px; font:400 16px/1.6 Archivo,sans-serif; color:rgba(7,7,7,.65)">Šest polja, minut posla. Odgovor stiže isti radni dan, sa konkretnim cenama.</p>
+            <h2 style="margin:0 0 16px; font:700 clamp(30px,3.4vw,46px)/1.05 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.03em">Zatražite ponudu</h2>
+            <p style="margin:0 0 26px; font:400 16px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.65)">Šest polja, minut posla. Odgovor stiže isti radni dan, sa konkretnim cenama.</p>
             <div style="background:#fff; border:1px solid rgba(7,7,7,.15); padding:20px 22px">
               <p style="margin:0 0 10px; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.18em; color:rgba(7,7,7,.5)">{priprema.kicker}</p>
-              <p style="margin:0; font:400 14px/1.8 Archivo,sans-serif; color:rgba(7,7,7,.7)">{priprema.stavke.map((s, i) => (<>{i > 0 && <br />}{s}</>))}</p>
+              <p style="margin:0; font:400 14px/1.8 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.7)">{priprema.stavke.map((s, i) => (<>{i > 0 && <br />}{s}</>))}</p>
             </div>
           </div>
           <div style="flex:1 1 560px; min-width:0">
@@ -169,17 +169,17 @@ const description =
                   <textarea rows="3" class="field" style="background:#fff; border:1px solid rgba(7,7,7,.3); color:#070707; font-size:15px; padding:14px; outline:none; resize:vertical"></textarea>
                 </label>
               </div>
-              <label style="display:flex; gap:12px; align-items:flex-start; margin-top:20px; font:400 13.5px/1.55 Archivo,sans-serif; color:rgba(7,7,7,.65); cursor:pointer">
+              <label style="display:flex; gap:12px; align-items:flex-start; margin-top:20px; font:400 13.5px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.65); cursor:pointer">
                 <input type="checkbox" id="pp-consent" style="width:18px; height:18px; margin-top:2px; accent-color:#070707; flex:none" />
                 <span>Slažem se da Preving Pro obradi moje podatke radi odgovora na ovaj upit, u skladu sa Politikom privatnosti.</span>
               </label>
               <p id="pp-need-consent" hidden style="margin:12px 0 0; font:500 13px 'IBM Plex Mono',monospace; color:#070707; background:#FECB0F; display:inline-block; padding:8px 12px">Označite saglasnost da bismo mogli da odgovorimo na upit.</p>
-              <div><button type="button" id="pp-submit" class="btn-dark" style="margin-top:24px; background:#070707; color:#FECB0F; border:none; font:700 15px Archivo,sans-serif; padding:16px 34px; cursor:pointer">Pošaljite upit →</button></div>
+              <div><button type="button" id="pp-submit" class="btn-dark" style="margin-top:24px; background:#070707; color:#FECB0F; border:none; font:700 15px 'IBM Plex Sans',system-ui,sans-serif; padding:16px 34px; cursor:pointer">Pošaljite upit →</button></div>
             </div>
             <div id="pp-sent" hidden style="background:#070707; color:#F2F1EC; padding:40px">
               <p style="margin:0; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.2em; color:#FECB0F">UPIT PRIMLJEN</p>
-              <p style="margin:14px 0 10px; font:800 28px Archivo,sans-serif; color:#fff; letter-spacing:-.02em">Primili smo vaš upit.</p>
-              <p style="margin:0; font:400 15.5px/1.6 Archivo,sans-serif; color:rgba(255,255,255,.7)">Javljamo se isti radni dan. Ako je hitno: <a href="tel:+381638185587" style="color:#FECB0F; text-decoration:underline; text-underline-offset:3px">063 81 855 87</a>.</p>
+              <p style="margin:14px 0 10px; font:700 28px 'IBM Plex Sans',system-ui,sans-serif; color:#fff; letter-spacing:-.02em">Primili smo vaš upit.</p>
+              <p style="margin:0; font:400 15.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.7)">Javljamo se isti radni dan. Ako je hitno: <a href="tel:+381638185587" style="color:#FECB0F; text-decoration:underline; text-underline-offset:3px">063 81 855 87</a>.</p>
             </div>
           </div>
         </div>

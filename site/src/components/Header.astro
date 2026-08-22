@@ -53,7 +53,7 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
 
 {showBanner && (
 <div class="hdr-banner" style={bannerStyle}>
-  <span style="font:600 11.5px 'IBM Plex Mono',monospace; letter-spacing:.14em">ČETIRI NOVA PRAVILNIKA SE PRIMENJUJU OD 01.01.2027. · JOŠ <span data-cd="days">{days}</span> DANA</span>
+  <span style="font:600 11.5px 'IBM Plex Mono',monospace; letter-spacing:.14em; font-variant-numeric:tabular-nums">ČETIRI NOVA PRAVILNIKA SE PRIMENJUJU OD 01.01.2027. · JOŠ <span data-cd="days">{days}</span> DANA</span>
   <a href={bannerHref} class="hdr-banner-a" style={bannerLinkStyle}>PROVERITE OBAVEZE →</a>
 </div>
 )}
@@ -62,7 +62,7 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
   <div class="hdr-bar" style="max-width:1360px; margin:0 auto; padding:0 32px; height:64px; display:flex; align-items:center; justify-content:space-between; gap:24px">
     <a href={logoHref} class="hdr-logo" style="display:flex; align-items:center; gap:11px; flex:none; color:#fff">
       <img src="/logo-mark.png" alt="" width="43" height="28" style="display:block; width:43px; height:28px; flex:none" />
-      <span style="font:800 16.5px Archivo,sans-serif; color:#fff; letter-spacing:-.01em">PREVING<span style="color:#FECB0F">PRO</span></span>
+      <span style="font:700 16.5px 'IBM Plex Sans',system-ui,sans-serif; color:#fff; letter-spacing:-.01em">PREVING<span style="color:#FECB0F">PRO</span></span>
     </a>
     <nav class="hdr-nav" style={navStyle}>
       {nav.map((item) => (
@@ -75,7 +75,7 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
         <span style="color:rgba(255,255,255,.3)">/</span>
         <button type="button" data-script-btn="lat" aria-pressed="true" style="all:unset; cursor:pointer; padding:12px 2px; color:#FECB0F; text-decoration:underline; text-underline-offset:4px">LAT</button>
       </span>
-      <a href={ctaHref} class="hdr-cta" style="background:#FECB0F; color:#070707; font:700 13px Archivo,sans-serif; padding:11px 18px; flex:none">Zatražite ponudu</a>
+      <a href={ctaHref} class="hdr-cta" style="background:#FECB0F; color:#070707; font:700 13px 'IBM Plex Sans',system-ui,sans-serif; padding:11px 18px; flex:none">Zatražite ponudu</a>
       <button type="button" class="cone-btn" id="hdr-cone" aria-expanded="false" aria-controls="hdr-menu" aria-label="Meni">
         <svg class="cone" viewBox="0 0 48 48" aria-hidden="true">
           <defs>
@@ -222,7 +222,7 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
     gap: 14px;
     padding: 14px 4px;
     border-bottom: 1px solid rgba(255, 255, 255, .1);
-    font: 800 clamp(22px, 6.4vw, 32px)/1.05 Archivo, sans-serif;
+    font: 800 clamp(22px, 6.4vw, 32px)/1.05 'IBM Plex Sans', system-ui, sans-serif;
     letter-spacing: -.03em;
     color: #fff;
     opacity: 0;
@@ -280,9 +280,11 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
   @media (max-width: 360px) {
     .hdr-bar { padding: 0 12px !important; gap: 8px !important; }
     .hdr-logo { gap: 8px !important; }
-    .hdr-logo > span:last-child { font-size: 14px !important; }
-    .hdr-right { gap: 6px !important; }
-    .hdr-cta { padding: 10px 8px !important; font-size: 11px !important; }
+    /* Cirilica je sira od latinice ("Затражите понуду" +7px), pa ovaj red
+       mora da ima rezervu da stane i u jednom i u drugom pismu. */
+    .hdr-logo > span:last-child { font-size: 13px !important; }
+    .hdr-right { gap: 4px !important; }
+    .hdr-cta { padding: 10px 6px !important; font-size: 10.5px !important; }
     .cone-btn { width: 40px; height: 40px; }
     .cone { width: 34px; height: 34px; }
   }

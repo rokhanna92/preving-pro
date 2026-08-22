@@ -25,11 +25,11 @@ const description =
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400..900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
     />
     <style is:global>
       html{scroll-behavior:smooth}
-      body{margin:0;background:#040404;font-family:Archivo,system-ui,sans-serif;color:#F2F1EC;-webkit-font-smoothing:antialiased;text-wrap:pretty}
+      body{margin:0;background:#040404;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#F2F1EC;-webkit-font-smoothing:antialiased;text-wrap:pretty}
       a{color:#F2F1EC;text-decoration:none}
       a:hover{color:#FECB0F}
       ::selection{background:#FECB0F;color:#070707}
@@ -48,7 +48,7 @@ const description =
       .btn-outline:hover{background:#070707 !important;color:#FECB0F !important}
 
       /* Mesto za fotografiju. Zamenite <img> tagom kad slika stigne. */
-      .img-slot{display:block;position:relative;font:13px/1.3 system-ui,-apple-system,sans-serif;width:100%;height:100%;aspect-ratio:3/2}
+      .img-slot{display:block;position:relative;font:13px/1.3 'IBM Plex Sans',system-ui,sans-serif;width:100%;height:100%;aspect-ratio:3/2}
       .img-slot-frame{position:absolute;inset:0;overflow:hidden;background:rgba(127,127,127,.08)}
       .img-slot-ring{position:absolute;inset:0;pointer-events:none;border:1.5px dashed currentColor;opacity:.35}
       .img-slot-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:12px;box-sizing:border-box}
@@ -63,8 +63,8 @@ const description =
       <section style="background:#040404; padding:88px 32px 56px">
         <div style="max-width:1360px; margin:0 auto">
           <p style="margin:0 0 20px; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.2em"><a href="/" style="color:rgba(255,255,255,.45)">POČETNA</a> / <span style="color:#FECB0F">O NAMA</span></p>
-          <h1 style="margin:0; font:800 clamp(38px,4.6vw,68px)/1 Archivo,sans-serif; letter-spacing:-.035em; color:#fff; max-width:16ch">Dva čoveka. Deset godina rafinerija.</h1>
-          <p style="margin:22px 0 0; font:400 17px/1.55 Archivo,sans-serif; color:rgba(255,255,255,.68); max-width:58ch">Preving Pro je agencija za preventivni inženjering i tehničko savetovanje iz Novog Sada. Iza imena stoje dvoje ljudi i deset godina rada na projektima gde se bezbednost ne dokazuje pečatom, nego praksom.</p>
+          <h1 style="margin:0; font:700 clamp(38px,4.6vw,68px)/1 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.035em; color:#fff; max-width:16ch">Dva čoveka. Deset godina rafinerija.</h1>
+          <p style="margin:22px 0 0; font:400 17px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.68); max-width:58ch">Preving Pro je agencija za preventivni inženjering i tehničko savetovanje iz Novog Sada. Iza imena stoje dvoje ljudi i deset godina rada na projektima gde se bezbednost ne dokazuje pečatom, nego praksom.</p>
           <div style="display:flex; flex-wrap:wrap; gap:0; margin-top:40px; border-top:1px solid rgba(255,255,255,.14); max-width:760px">
             {stats.map((s, i) => (
               <div style={`display:flex; justify-content:space-between; gap:20px; width:100%;${i === stats.length - 1 ? '' : ' border-bottom:1px dotted rgba(255,255,255,.2);'} padding:11px 0; font:500 14px 'IBM Plex Mono',monospace`}><span style="color:rgba(255,255,255,.55)">{s.label}</span><span style="color:#FECB0F">{s.value}</span></div>
@@ -76,7 +76,7 @@ const description =
       <section style="background:#070707; border-top:1px solid rgba(255,255,255,.09); padding:88px 32px 96px">
         <div style="max-width:1080px; margin:0 auto">
           <p style="margin:0 0 12px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:rgba(254,203,15,.7)">PUTANJA</p>
-          <h2 style="margin:0 0 48px; font:800 clamp(28px,3.2vw,44px)/1.05 Archivo,sans-serif; letter-spacing:-.03em; color:#fff">Od Nitre do Temerinskog puta</h2>
+          <h2 style="margin:0 0 48px; font:700 clamp(28px,3.2vw,44px)/1.05 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.03em; color:#fff">Od Nitre do Temerinskog puta</h2>
           <div id="tl-wrap" style="position:relative; padding-left:26px">
             <div style="position:absolute; left:7px; top:8px; bottom:8px; width:2px; background:rgba(255,255,255,.14)" aria-hidden="true"></div>
             <div id="tl-fill" style="position:absolute; left:7px; top:8px; width:2px; height:0%; background:#FECB0F; max-height:calc(100% - 16px)" aria-hidden="true"></div>
@@ -84,8 +84,8 @@ const description =
               <div data-st style={`position:relative; padding:0 0 ${i === timeline.length - 1 ? '4px' : '44px'} 26px`}>
                 <span class="st-dot" style="position:absolute; left:-26px; top:5px; width:14px; height:14px; border-radius:50%; box-sizing:border-box"></span>
                 <p class="st-tag" style="margin:0; font:700 12px 'IBM Plex Mono',monospace; letter-spacing:.2em">{t.tag}</p>
-                <p style="margin:8px 0 6px; font:700 20px Archivo,sans-serif; color:#fff">{t.title}</p>
-                <p style={`margin:0${t.chips ? ' 0 14px' : ''}; font:400 15px/1.6 Archivo,sans-serif; color:rgba(255,255,255,.62); max-width:62ch`}>{t.text}</p>
+                <p style="margin:8px 0 6px; font:700 20px 'IBM Plex Sans',system-ui,sans-serif; color:#fff">{t.title}</p>
+                <p style={`margin:0${t.chips ? ' 0 14px' : ''}; font:400 15px/1.6 "IBM Plex Sans",system-ui,sans-serif; color:rgba(255,255,255,.62); max-width:62ch`}>{t.text}</p>
                 {t.chips && (
                   <div style="display:flex; flex-wrap:wrap; gap:8px; font:600 11.5px 'IBM Plex Mono',monospace">
                     {t.chips.map((c) => (
@@ -102,7 +102,7 @@ const description =
       <section style="background:#EFEDE6; color:#070707; padding:88px 32px 92px">
         <div style="max-width:1360px; margin:0 auto">
           <div style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:44px">
-            <h2 style="margin:0; font:800 clamp(30px,3.4vw,46px) Archivo,sans-serif; letter-spacing:-.03em">Koga dobijate</h2>
+            <h2 style="margin:0; font:700 clamp(30px,3.4vw,46px) 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.03em">Koga dobijate</h2>
             <span style="font:500 11px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.45); letter-spacing:.2em">TIM / 02</span>
           </div>
           <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr)); gap:28px; max-width:980px">
@@ -119,9 +119,9 @@ const description =
                   </div>
                 </div>
                 <div style="padding:24px 26px 26px">
-                  <p style="margin:0; font:800 22px Archivo,sans-serif; letter-spacing:-.01em">{p.name}</p>
+                  <p style="margin:0; font:700 22px 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.01em">{p.name}</p>
                   <p style="margin:6px 0 14px; font:600 11.5px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(7,7,7,.55)">{p.role}</p>
-                  <p style="margin:0; font:400 14.5px/1.6 Archivo,sans-serif; color:rgba(7,7,7,.7)">{p.bio}</p>
+                  <p style="margin:0; font:400 14.5px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.7)">{p.bio}</p>
                 </div>
               </div>
             ))}
@@ -136,7 +136,7 @@ const description =
             {teren.map((r, i) => (
               <div data-fd style={`display:flex; flex-wrap:wrap; gap:8px 40px;${i === teren.length - 1 ? '' : ' border-bottom:1px solid rgba(255,255,255,.14);'} padding:22px 0${i === 0 ? '' : `; transition-delay:${(i * 7) / 100}s`}`}>
                 <span style="flex:0 0 220px; font:700 13px 'IBM Plex Mono',monospace; letter-spacing:.12em; color:#FECB0F">{r.label}</span>
-                <span style="flex:1 1 400px; font:400 15px/1.6 Archivo,sans-serif; color:rgba(255,255,255,.72)">{r.text}</span>
+                <span style="flex:1 1 400px; font:400 15px/1.6 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.72)">{r.text}</span>
               </div>
             ))}
           </div>
@@ -145,9 +145,9 @@ const description =
 
       <section style="background:#FECB0F; color:#070707; padding:72px 32px">
         <div style="max-width:1360px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:28px">
-          <p style="margin:0; font:800 clamp(26px,3vw,40px)/1.1 Archivo,sans-serif; letter-spacing:-.03em; max-width:30ch">Upoznajmo se na vašem terenu, ne na sastanku.</p>
+          <p style="margin:0; font:700 clamp(26px,3vw,40px)/1.1 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.03em; max-width:30ch">Upoznajmo se na vašem terenu, ne na sastanku.</p>
           <div style="display:flex; flex-wrap:wrap; gap:12px">
-            <a href="/kontakt" class="btn-dark" style="background:#070707; color:#FECB0F; font:700 15px Archivo,sans-serif; padding:16px 28px">Zatražite ponudu</a>
+            <a href="/kontakt" class="btn-dark" style="background:#070707; color:#FECB0F; font:700 15px 'IBM Plex Sans',system-ui,sans-serif; padding:16px 28px">Zatražite ponudu</a>
             <a href="tel:+381638185587" class="btn-outline" style="border:2px solid #070707; color:#070707; font:600 14.5px 'IBM Plex Mono',monospace; padding:14px 24px">063 81 855 87</a>
           </div>
         </div>

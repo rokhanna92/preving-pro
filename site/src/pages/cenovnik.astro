@@ -110,6 +110,11 @@ const description =
           transform:translate(calc(-50% + var(--wmX)), calc(-50% + var(--wmY)));
         }
       }
+      /* Od 1790px ima mesta i pored najsire sekcije (1360px), pa se natpis
+         centrira izmedu njene ivice (50% + 680px) i ivice prozora. */
+      @media (min-width:1790px){
+        .cen-watermark{ left:calc(75% + 340px); }
+      }
       @media (max-width:900px){.cen-watermark{font-size:132px; right:4px}}
       @media (max-width:520px){.cen-watermark{font-size:96px}}
       /* Bez pomeranja: prikazi sredinu natpisa, staticno. */
@@ -131,7 +136,7 @@ const description =
       </section>
 
       <section style="background:#EFEDE6; padding:0 32px; position:relative; z-index:1">
-        <div style="max-width:1360px; margin:-1px auto 0; background:#070707; color:#F2F1EC; transform:translateY(0); padding:38px 38px 34px; display:flex; flex-wrap:wrap; gap:44px; box-shadow:0 30px 60px rgba(7,7,7,.18)">
+        <div style="max-width:1360px; margin:-1px auto 0; box-sizing:border-box; background:#070707; color:#F2F1EC; transform:translateY(0); padding:38px 38px 34px; display:flex; flex-wrap:wrap; gap:44px; box-shadow:0 30px 60px rgba(7,7,7,.18)">
           <div style="flex:1 1 440px; min-width:0">
             <p style="margin:0 0 4px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:#FECB0F">PROCENA / INTERAKTIVNO</p>
             <p style="margin:0 0 26px; font:800 26px Archivo,sans-serif; letter-spacing:-.02em; color:#fff">Koliko bi otprilike koštalo baš vama</p>

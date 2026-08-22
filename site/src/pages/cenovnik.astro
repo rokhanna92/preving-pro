@@ -85,14 +85,34 @@ const description =
       /* Vodeni zig uz desnu ivicu. writing-mode umesto rotate(90deg): kutija
          elementa je uska i visoka, pa right:0 radi bez racunanja sirine teksta. */
       .cen-watermark{
+        --wm: 0%;
         position:fixed; right:10px; top:50%; transform:translateY(-50%);
         writing-mode:vertical-rl; text-orientation:mixed;
-        font:900 151px Archivo,sans-serif; letter-spacing:-.04em;
+        font:900 196px Archivo,sans-serif; letter-spacing:-.04em;
         color:rgba(7,7,7,.05); white-space:nowrap;
         pointer-events:none; user-select:none; z-index:0;
       }
-      @media (max-width:900px){.cen-watermark{font-size:104px; right:4px}}
-      @media (max-width:520px){.cen-watermark{font-size:76px}}
+      /* Iznad 1510px staje u prazninu desno od kontejnera, pa se centrira
+         izmedu ivice kontejnera (50% + 540px) i ivice prozora. */
+      @media (min-width:1510px){
+        .cen-watermark{ right:auto; left:calc(75% + 270px); transform:translate(-50%,-50%); }
+      }
+      /* Slova su iscrtana konturom i pune se odozgo nadole kako se strana
+         skroluje, kao da ih ploter crta. --wm postavlja skripta. */
+      @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+        .cen-watermark{
+          color:transparent;
+          -webkit-text-stroke:1.6px rgba(7,7,7,.085);
+          background-image:linear-gradient(180deg,
+            rgba(7,7,7,.11) 0 var(--wm),
+            rgba(7,7,7,0) var(--wm));
+          -webkit-background-clip:text;
+          background-clip:text;
+        }
+      }
+      @media (max-width:900px){.cen-watermark{font-size:132px; right:4px}}
+      @media (max-width:520px){.cen-watermark{font-size:96px; -webkit-text-stroke-width:1.1px}}
+      @media (prefers-reduced-motion:reduce){.cen-watermark{--wm:100%}}
     </style>
   </head>
   <body>
@@ -289,6 +309,28 @@ const description =
       document.querySelectorAll<HTMLElement>('[data-cd="days"]').forEach((el) => {
         if (el.textContent !== days) el.textContent = days;
       });
+
+      // Vodeni zig se puni odozgo nadole prema tome koliko je strana odskrolovana.
+      const wm = document.querySelector<HTMLElement>('.cen-watermark');
+      if (wm && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        let wmRaf = 0;
+        const paint = () => {
+          const max = document.documentElement.scrollHeight - window.innerHeight;
+          const p = max > 0 ? Math.min(Math.max(window.scrollY / max, 0), 1) : 1;
+          // krene od 8% da se vidi da nije prazno, zavrsi na 100%
+          wm.style.setProperty('--wm', (8 + p * 92).toFixed(1) + '%');
+        };
+        const onWmScroll = () => {
+          if (wmRaf) return;
+          wmRaf = requestAnimationFrame(() => {
+            wmRaf = 0;
+            paint();
+          });
+        };
+        window.addEventListener('scroll', onWmScroll, { passive: true });
+        window.addEventListener('resize', onWmScroll, { passive: true });
+        paint();
+      }
 
       // Fade-up za grupe cenovnika.
       const fade = document.querySelectorAll<HTMLElement>('[data-fd]');

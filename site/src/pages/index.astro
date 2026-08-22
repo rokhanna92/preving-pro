@@ -514,12 +514,13 @@ const description =
       tick();
       setInterval(tick, 1000);
 
-      // Pismo: ćirilica / latinica.
+      // Pismo: ćirilica / latinica. Dugmad postoje i u traci i u meniju kupe,
+      // pa se poredi po vrednosti, ne po elementu, da se oba para usklade.
       const scriptBtns = document.querySelectorAll<HTMLElement>('[data-script-btn]');
       scriptBtns.forEach((btn) => {
         btn.addEventListener('click', () => {
           scriptBtns.forEach((b) => {
-            b.style.color = b === btn ? '#FECB0F' : 'rgba(255,255,255,.5)';
+            b.style.color = b.dataset.scriptBtn === btn.dataset.scriptBtn ? '#FECB0F' : 'rgba(255,255,255,.5)';
           });
         });
       });

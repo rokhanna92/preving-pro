@@ -82,9 +82,69 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
         </span>
       )}
       <a href={ctaHref} class="hdr-cta" style="background:#FECB0F; color:#070707; font:700 13px Archivo,sans-serif; padding:11px 18px; flex:none">Zatražite ponudu</a>
+      <button type="button" class="cone-btn" id="hdr-cone" aria-expanded="false" aria-controls="hdr-menu" aria-label="Meni">
+        <svg class="cone" viewBox="0 0 44 44" aria-hidden="true">
+          <defs>
+            <linearGradient id="cone-gy" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#7d5f04"></stop>
+              <stop offset=".3" stop-color="#d9a90c"></stop>
+              <stop offset=".46" stop-color="#FECB0F"></stop>
+              <stop offset=".52" stop-color="#ffe27a"></stop>
+              <stop offset=".6" stop-color="#FECB0F"></stop>
+              <stop offset=".82" stop-color="#c79a09"></stop>
+              <stop offset="1" stop-color="#6e5403"></stop>
+            </linearGradient>
+            <linearGradient id="cone-gw" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#8f8f8f"></stop>
+              <stop offset=".32" stop-color="#e8e8e8"></stop>
+              <stop offset=".5" stop-color="#ffffff"></stop>
+              <stop offset=".68" stop-color="#e0e0e0"></stop>
+              <stop offset="1" stop-color="#858585"></stop>
+            </linearGradient>
+            <linearGradient id="cone-gb" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#e7b70d"></stop>
+              <stop offset=".5" stop-color="#c1950a"></stop>
+              <stop offset="1" stop-color="#8a6a05"></stop>
+            </linearGradient>
+          </defs>
+          <ellipse class="cone-shadow" cx="22" cy="40.6" rx="15" ry="2" fill="#000" opacity=".35"></ellipse>
+          <g class="seg seg3">
+            <path d="M11.6 28 H32.4 L35 34 H9 Z" fill="url(#cone-gy)"></path>
+            <rect x="6" y="34" width="32" height="5" rx="1.8" fill="url(#cone-gb)"></rect>
+          </g>
+          <g class="seg seg2">
+            <path d="M16.4 17 H27.6 L30.7 24 H13.3 Z" fill="url(#cone-gy)"></path>
+            <path d="M13.3 24 H30.7 L32.4 28 H11.6 Z" fill="url(#cone-gw)"></path>
+          </g>
+          <g class="seg seg1">
+            <path d="M22 4 L18.5 12 H25.5 Z" fill="url(#cone-gy)"></path>
+            <path d="M18.5 12 H25.5 L27.6 17 H16.4 Z" fill="url(#cone-gw)"></path>
+          </g>
+        </svg>
+      </button>
     </div>
   </div>
 </div>
+
+<nav class="cone-menu" id="hdr-menu" aria-label="Glavna navigacija">
+  <div class="cone-menu-grid">
+    {nav.map((item) => (
+      <a href={item.href}><span>{item.n}</span>{item.label}</a>
+    ))}
+  </div>
+  <div class="cone-menu-foot">
+    {!inner ? (
+      <span style="display:flex; align-items:center; gap:5px; font:500 12px 'IBM Plex Mono',monospace">
+        <button type="button" data-script-btn="cir" style="all:unset; cursor:pointer; padding:10px 2px; color:rgba(255,255,255,.5)">ЋИР</button>
+        <span style="color:rgba(255,255,255,.3)">/</span>
+        <button type="button" data-script-btn="lat" style="all:unset; cursor:pointer; padding:10px 2px; color:#FECB0F; text-decoration:underline; text-underline-offset:4px">LAT</button>
+      </span>
+    ) : (
+      <span>PREVING<b style="color:#FECB0F">PRO</b></span>
+    )}
+    <a href="tel:+381638185587">063 81 855 87</a>
+  </div>
+</nav>
 
 <style>
   /* Own hover rules, so the bar behaves the same on dark and light pages.
@@ -94,34 +154,154 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
   .hdr-logo:hover { text-decoration: none !important; }
   .hdr-cta:hover { background: #fff !important; color: #070707 !important; text-decoration: none !important; }
 
-  /* Ispod 900px traka se prelama u dva reda: logo i dugme gore, navigacija ispod.
-     !important je obavezan jer osnovne vrednosti stoje u inline style atributima. */
+  /* ---- kupa: dugme koje zamenjuje navigaciju na tabletu i telefonu ---- */
+  .cone-btn {
+    all: unset;
+    width: 46px;
+    height: 46px;
+    display: none; /* vidljivo samo ispod 900px */
+    place-items: center;
+    cursor: pointer;
+    flex: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .cone-btn:focus-visible { outline: 2px solid #FECB0F; outline-offset: 2px; }
+  .cone { width: 38px; height: 38px; display: block; overflow: visible; }
+
+  /* Svaki segment kupe se odmota: pun okret unazad dok se rasteže u ravnu
+     traku. Otvoreno stanje izgleda kao sklopljena teleskopska kupa. */
+  .seg {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform .62s cubic-bezier(.34, 1.38, .44, 1);
+  }
+  .seg1 { transition-delay: 0s; }
+  .seg2 { transition-delay: .07s; }
+  .seg3 { transition-delay: .14s; }
+  .cone-btn[aria-expanded="true"] .seg1 { transform: translateY(-1.5px) rotate(-360deg) scaleX(2.5) scaleY(.45); }
+  .cone-btn[aria-expanded="true"] .seg2 { transform: rotate(-360deg) scaleX(1.35) scaleY(.5); }
+  .cone-btn[aria-expanded="true"] .seg3 { transform: translateY(1.5px) rotate(-360deg) scaleX(.88) scaleY(.55); }
+
+  .cone-shadow {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform .62s ease, opacity .62s ease;
+  }
+  .cone-btn[aria-expanded="true"] .cone-shadow { transform: scaleX(1.18); opacity: .16; }
+
+  /* ---- meni preko celog ekrana, otvara se kružno iz kupe ---- */
+  .cone-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 59; /* ispod trake (60), pa kupa ostaje vidljiva i pritisliva */
+    background: rgba(4, 4, 4, .97);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    padding: 110px 24px 40px;
+    box-sizing: border-box;
+    clip-path: circle(0% at calc(100% - 39px) 41px);
+    transition: clip-path .52s cubic-bezier(.4, 0, .2, 1);
+    pointer-events: none;
+  }
+  .cone-menu.open { clip-path: circle(145% at calc(100% - 39px) 41px); pointer-events: auto; }
+  .cone-menu-grid { display: grid; gap: 2px; max-width: 520px; width: 100%; margin: 0 auto; }
+  .cone-menu-grid a {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 14px 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    font: 800 clamp(22px, 6.4vw, 32px)/1.05 Archivo, sans-serif;
+    letter-spacing: -.03em;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .4s ease, transform .4s ease;
+  }
+  .cone-menu.open .cone-menu-grid a { opacity: 1; transform: none; }
+  .cone-menu.open .cone-menu-grid a:nth-child(1) { transition-delay: .16s; }
+  .cone-menu.open .cone-menu-grid a:nth-child(2) { transition-delay: .21s; }
+  .cone-menu.open .cone-menu-grid a:nth-child(3) { transition-delay: .26s; }
+  .cone-menu.open .cone-menu-grid a:nth-child(4) { transition-delay: .31s; }
+  .cone-menu.open .cone-menu-grid a:nth-child(5) { transition-delay: .36s; }
+  .cone-menu.open .cone-menu-grid a:nth-child(6) { transition-delay: .41s; }
+  .cone-menu-grid a span { font: 700 12px 'IBM Plex Mono', monospace; color: #FECB0F; flex: none; }
+  .cone-menu-foot {
+    max-width: 520px;
+    width: 100%;
+    margin: 26px auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font: 600 12px 'IBM Plex Mono', monospace;
+    color: rgba(255, 255, 255, .5);
+    opacity: 0;
+    transition: opacity .4s ease .44s;
+  }
+  .cone-menu.open .cone-menu-foot { opacity: 1; }
+  .cone-menu-foot a { font: 700 15px 'IBM Plex Mono', monospace; color: #FECB0F; }
+
+  /* Tablet i telefon: navigacija u traci nestaje, kupa je preuzima.
+     Desktop iznad 900px ostaje netaknut. */
   @media (max-width: 900px) {
     .hdr-bar {
-      height: auto !important;
-      padding: 10px 20px !important;
-      flex-wrap: wrap !important;
-      gap: 6px 12px !important;
+      height: 56px !important;
+      padding: 0 16px !important;
+      gap: 12px !important;
     }
-    .hdr-nav {
-      order: 3;
-      width: 100%;
-      justify-content: flex-start !important;
-      gap: 0 18px !important;
-    }
-    /* Prstu treba veća meta od 14px reda teksta. */
-    .hdr-nav a { padding: 10px 0; }
-    .hdr-logo { padding: 4px 0; }
+    .hdr-nav { display: none !important; }
+    .hdr-scripts { display: none !important; } /* prekidač živi u meniju */
+    .hdr-right { gap: 8px !important; }
+    .cone-btn { display: grid; }
+    .cone-menu { display: flex; }
+    .hdr-banner-a { display: inline-block; padding: 7px 0; }
   }
 
   @media (max-width: 460px) {
-    .hdr-bar { padding: 8px 16px !important; }
-    .hdr-nav { gap: 0 14px !important; font-size: 11.5px !important; }
-    .hdr-scripts { display: none !important; }
-    .hdr-cta { padding: 11px 14px !important; font-size: 12px !important; }
+    .hdr-cta { padding: 11px 12px !important; font-size: 12px !important; }
   }
 
-  @media (max-width: 900px) {
-    .hdr-banner-a { display: inline-block; padding: 7px 0; }
+  /* Najuži telefoni: logo, dugme i kupa moraju stati u 320px. */
+  @media (max-width: 360px) {
+    .hdr-bar { padding: 0 12px !important; gap: 8px !important; }
+    .hdr-logo { gap: 8px !important; }
+    .hdr-logo > span:last-child { font-size: 14px !important; }
+    .hdr-right { gap: 6px !important; }
+    .hdr-cta { padding: 10px 8px !important; font-size: 11px !important; }
+    .cone-btn { width: 40px; height: 40px; }
+    .cone { width: 34px; height: 34px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .seg, .cone-shadow, .cone-menu, .cone-menu-grid a, .cone-menu-foot { transition: none !important; }
   }
 </style>
+
+<script>
+  const btn = document.getElementById('hdr-cone');
+  const menu = document.getElementById('hdr-menu');
+
+  if (btn && menu) {
+    const setOpen = (v: boolean) => {
+      btn.setAttribute('aria-expanded', String(v));
+      menu.classList.toggle('open', v);
+      document.body.style.overflow = v ? 'hidden' : '';
+    };
+    btn.addEventListener('click', () => setOpen(btn.getAttribute('aria-expanded') !== 'true'));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    });
+    menu.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) setOpen(false);
+    });
+    // Ako se prozor raširi iznad 900px dok je meni otvoren, zatvori ga.
+    matchMedia('(min-width: 901px)').addEventListener('change', (e) => {
+      if (e.matches) setOpen(false);
+    });
+  }
+</script>

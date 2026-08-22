@@ -70,13 +70,11 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
       ))}
     </nav>
     <div class="hdr-right" style="display:flex; align-items:center; gap:16px; flex:none">
-      {!inner && (
-        <span class="hdr-scripts" style="display:flex; align-items:center; gap:5px; font:500 11px 'IBM Plex Mono',monospace">
-          <button type="button" data-script-btn="cir" style="all:unset; cursor:pointer; padding:12px 2px; color:rgba(255,255,255,.5)">ЋИР</button>
-          <span style="color:rgba(255,255,255,.3)">/</span>
-          <button type="button" data-script-btn="lat" style="all:unset; cursor:pointer; padding:12px 2px; color:#FECB0F; text-decoration:underline; text-underline-offset:4px">LAT</button>
-        </span>
-      )}
+      <span class="hdr-scripts" data-no-cyr style="display:flex; align-items:center; gap:5px; font:500 11px 'IBM Plex Mono',monospace">
+        <button type="button" data-script-btn="cir" aria-pressed="false" style="all:unset; cursor:pointer; padding:12px 2px; color:rgba(255,255,255,.5)">ЋИР</button>
+        <span style="color:rgba(255,255,255,.3)">/</span>
+        <button type="button" data-script-btn="lat" aria-pressed="true" style="all:unset; cursor:pointer; padding:12px 2px; color:#FECB0F; text-decoration:underline; text-underline-offset:4px">LAT</button>
+      </span>
       <a href={ctaHref} class="hdr-cta" style="background:#FECB0F; color:#070707; font:700 13px Archivo,sans-serif; padding:11px 18px; flex:none">Zatražite ponudu</a>
       <button type="button" class="cone-btn" id="hdr-cone" aria-expanded="false" aria-controls="hdr-menu" aria-label="Meni">
         <svg class="cone" viewBox="0 0 48 48" aria-hidden="true">
@@ -141,15 +139,11 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
     ))}
   </div>
   <div class="cone-menu-foot">
-    {!inner ? (
-      <span style="display:flex; align-items:center; gap:5px; font:500 12px 'IBM Plex Mono',monospace">
-        <button type="button" data-script-btn="cir" style="all:unset; cursor:pointer; padding:10px 2px; color:rgba(255,255,255,.5)">ЋИР</button>
-        <span style="color:rgba(255,255,255,.3)">/</span>
-        <button type="button" data-script-btn="lat" style="all:unset; cursor:pointer; padding:10px 2px; color:#FECB0F; text-decoration:underline; text-underline-offset:4px">LAT</button>
-      </span>
-    ) : (
-      <span>PREVING<b style="color:#FECB0F">PRO</b></span>
-    )}
+    <span data-no-cyr style="display:flex; align-items:center; gap:5px; font:500 12px 'IBM Plex Mono',monospace">
+      <button type="button" data-script-btn="cir" aria-pressed="false" style="all:unset; cursor:pointer; padding:10px 2px; color:rgba(255,255,255,.5)">ЋИР</button>
+      <span style="color:rgba(255,255,255,.3)">/</span>
+      <button type="button" data-script-btn="lat" aria-pressed="true" style="all:unset; cursor:pointer; padding:10px 2px; color:#FECB0F; text-decoration:underline; text-underline-offset:4px">LAT</button>
+    </span>
     <a href="tel:+381638185587">063 81 855 87</a>
   </div>
 </nav>
@@ -299,6 +293,133 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
 </style>
 
 <script>
+  // ---------- Pismo: latinica <-> cirilica ----------
+  // Srpski je 1:1 preslikavanje, osim tri digrafa koji moraju ici prvi.
+  const MAP: Record<string, string> = {
+    'DŽ': 'Џ', 'Dž': 'Џ', 'dž': 'џ',
+    'LJ': 'Љ', 'Lj': 'Љ', 'lj': 'љ',
+    'NJ': 'Њ', 'Nj': 'Њ', 'nj': 'њ',
+    A: 'А', B: 'Б', C: 'Ц', Č: 'Ч', Ć: 'Ћ', D: 'Д', Đ: 'Ђ', E: 'Е', F: 'Ф',
+    G: 'Г', H: 'Х', I: 'И', J: 'Ј', K: 'К', L: 'Л', M: 'М', N: 'Н', O: 'О',
+    P: 'П', R: 'Р', S: 'С', Š: 'Ш', T: 'Т', U: 'У', V: 'В', Z: 'З', Ž: 'Ж',
+    a: 'а', b: 'б', c: 'ц', č: 'ч', ć: 'ћ', d: 'д', đ: 'ђ', e: 'е', f: 'ф',
+    g: 'г', h: 'х', i: 'и', j: 'ј', k: 'к', l: 'л', m: 'м', n: 'н', o: 'о',
+    p: 'п', r: 'р', s: 'с', š: 'ш', t: 'т', u: 'у', v: 'в', z: 'з', ž: 'ж',
+  };
+  // Duzi kljucevi prvi, da 'lj' pobedi 'l' + 'j'.
+  const RE = new RegExp(
+    Object.keys(MAP).sort((a, b) => b.length - a.length).join('|'),
+    'g'
+  );
+
+  // Strana imena i robne marke ostaju latinicom.
+  const KEEP = new Set([
+    'Preving', 'PREVING', 'Pro', 'PRO', 'Slovnaft', 'MOL', 'Unipetrol', 'OMV',
+    'INA', 'Alcovisor', 'Mark', 'Plus', 'SAM', 'Industries', 'ABEP', 'Toolbox',
+    'USB', 'LAT',
+    // Q, W, X i Y nemaju cirilicni par: bez ovoga bi FAQ postao "ФАQ".
+    'FAQ',
+  ]);
+  // Reci u kojima lj/nj/dz NISU digrafi. Danasnji tekst ih nema, ali nova
+  // kopija moze da ih uvede, pa se ovde stite.
+  const FALSE_DIGRAPH: Record<string, string> = {
+    injekcija: 'инјекција', injekcije: 'инјекције', konjunktura: 'конјунктура',
+    nadziveti: 'надживети', nadzanr: 'наджанр', podzanr: 'поджанр',
+    tanjug: 'Танјуг', vanjezicki: 'ванјезички',
+  };
+
+  const stripEdges = (t: string) => t.replace(/^[^\wČčĆćĐđŠšŽž]+|[^\wČčĆćĐđŠšŽž]+$/g, '');
+
+  const toCyr = (s: string) =>
+    s.replace(/\S+/g, (tok) => {
+      const bare = stripEdges(tok);
+      if (!bare) return tok;
+      if (KEEP.has(bare)) return tok;
+      if (tok.includes('@')) return tok;                       // imejl
+      if (/^(https?:|www\.)/i.test(tok)) return tok;           // adresa
+      if (/\.(rs|com|net|org|io)\b/i.test(tok)) return tok;    // domen
+      const fd = FALSE_DIGRAPH[bare.toLowerCase()];
+      if (fd) return tok.replace(bare, fd);
+      return tok.replace(RE, (m) => MAP[m]);
+    });
+
+  // Cuva se latinicni original i ono sto smo poslednje upisali, da bismo
+  // razlikovali svoju izmenu od izmene koju je napravila stranica.
+  const source = new WeakMap<Text, string>();
+  const written = new WeakMap<Text, string>();
+  let mode: 'lat' | 'cir' = 'lat';
+  try {
+    if (localStorage.getItem('pp-script') === 'cir') mode = 'cir';
+  } catch (e) {
+    /* privatni rezim: ostaje latinica */
+  }
+
+  const skip = (t: Text) => {
+    const p = t.parentElement;
+    return !p || !!p.closest('script,style,noscript,[data-no-cyr]');
+  };
+
+  // Mora da prihvati i cirilicu: kad je tekst vec preveden, povratak na
+  // latinicu bi bio preskocen da se trazi samo latinicno slovo.
+  const HAS_LETTER = /[A-Za-zČčĆćĐđŠšŽžЀ-ӿ]/;
+
+  const convertNode = (t: Text) => {
+    if (skip(t)) return;
+    const now = t.nodeValue;
+    if (!now || !HAS_LETTER.test(now)) return;
+    // Ako tekst nije onaj koji smo mi upisali, stranica ga je promenila:
+    // uzmi novu vrednost kao novi original.
+    if (written.get(t) !== now) source.set(t, now);
+    const src = source.get(t) as string;
+    const out = mode === 'cir' ? toCyr(src) : src;
+    if (t.nodeValue !== out) t.nodeValue = out;
+    written.set(t, out);
+  };
+
+  const convertTree = (root: Node) => {
+    if (root.nodeType === 3) return convertNode(root as Text);
+    if (root.nodeType !== 1 && root.nodeType !== 9 && root.nodeType !== 11) return;
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const list: Text[] = [];
+    let n: Node | null;
+    while ((n = w.nextNode())) list.push(n as Text);
+    list.forEach(convertNode);
+  };
+
+  let titleSrc = document.title;
+  const applyScript = () => {
+    convertTree(document.body);
+    document.title = mode === 'cir' ? toCyr(titleSrc) : titleSrc;
+    document.documentElement.lang = mode === 'cir' ? 'sr-Cyrl' : 'sr-Latn';
+    document.querySelectorAll<HTMLElement>('[data-script-btn]').forEach((b) => {
+      const on = b.dataset.scriptBtn === mode;
+      b.style.color = on ? '#FECB0F' : 'rgba(255,255,255,.5)';
+      b.setAttribute('aria-pressed', String(on));
+    });
+  };
+  // Stranice koje same menjaju tekst (sat, procena, rezultat ankete) ne moraju
+  // nista da znaju: posmatrac prevede sve sto se doda ili promeni.
+  new MutationObserver((muts) => {
+    if (mode !== 'cir') return;
+    for (const m of muts) {
+      if (m.type === 'childList') m.addedNodes.forEach(convertTree);
+      else if (m.type === 'characterData') convertNode(m.target as Text);
+    }
+  }).observe(document.body, { childList: true, characterData: true, subtree: true });
+
+  document.querySelectorAll<HTMLElement>('[data-script-btn]').forEach((b) => {
+    b.addEventListener('click', () => {
+      mode = b.dataset.scriptBtn === 'cir' ? 'cir' : 'lat';
+      try {
+        localStorage.setItem('pp-script', mode);
+      } catch (e) {
+        /* bez pamcenja izbora */
+      }
+      applyScript();
+    });
+  });
+  applyScript();
+
   const btn = document.getElementById('hdr-cone');
   const menu = document.getElementById('hdr-menu');
 

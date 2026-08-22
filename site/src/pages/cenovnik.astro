@@ -85,34 +85,35 @@ const description =
       /* Vodeni zig uz desnu ivicu. writing-mode umesto rotate(90deg): kutija
          elementa je uska i visoka, pa right:0 radi bez racunanja sirine teksta. */
       .cen-watermark{
-        --wm: 0%;
-        position:fixed; right:10px; top:50%; transform:translateY(-50%);
+        --wmY: 0px; --wmX: 0px;
+        position:fixed; right:10px; top:50%;
+        transform:translateY(calc(-50% + var(--wmY)));
         writing-mode:vertical-rl; text-orientation:mixed;
         font:900 196px Archivo,sans-serif; letter-spacing:-.04em;
-        color:rgba(7,7,7,.05); white-space:nowrap;
-        pointer-events:none; user-select:none; z-index:0;
+        white-space:nowrap;
+        pointer-events:none; user-select:none;
+        /* Iznad pozadina sekcija (koje su z-index auto/1) da natpis ne nestane
+           na tamnim delovima strane, ali ispod lepljive trake (60). */
+        z-index:3;
+        will-change:transform;
+        /* Natpis putuje preko tamnog zaglavlja i svetlog tela strane.
+           difference sa belom daje isti kontrast na obe podloge: na svetloj
+           potamni, na tamnoj posvetli, pa se ceo natpis vidi dok klizi. */
+        color:rgba(255,255,255,.08);
+        mix-blend-mode:difference;
       }
       /* Iznad 1510px staje u prazninu desno od kontejnera, pa se centrira
          izmedu ivice kontejnera (50% + 540px) i ivice prozora. */
       @media (min-width:1510px){
-        .cen-watermark{ right:auto; left:calc(75% + 270px); transform:translate(-50%,-50%); }
-      }
-      /* Slova su iscrtana konturom i pune se odozgo nadole kako se strana
-         skroluje, kao da ih ploter crta. --wm postavlja skripta. */
-      @supports ((-webkit-background-clip: text) or (background-clip: text)) {
         .cen-watermark{
-          color:transparent;
-          -webkit-text-stroke:1.6px rgba(7,7,7,.085);
-          background-image:linear-gradient(180deg,
-            rgba(7,7,7,.11) 0 var(--wm),
-            rgba(7,7,7,0) var(--wm));
-          -webkit-background-clip:text;
-          background-clip:text;
+          right:auto; left:calc(75% + 270px);
+          transform:translate(calc(-50% + var(--wmX)), calc(-50% + var(--wmY)));
         }
       }
       @media (max-width:900px){.cen-watermark{font-size:132px; right:4px}}
-      @media (max-width:520px){.cen-watermark{font-size:96px; -webkit-text-stroke-width:1.1px}}
-      @media (prefers-reduced-motion:reduce){.cen-watermark{--wm:100%}}
+      @media (max-width:520px){.cen-watermark{font-size:96px}}
+      /* Bez pomeranja: prikazi sredinu natpisa, staticno. */
+      @media (prefers-reduced-motion:reduce){.cen-watermark{--wmY:0px; --wmX:0px}}
     </style>
   </head>
   <body>
@@ -310,15 +311,26 @@ const description =
         if (el.textContent !== days) el.textContent = days;
       });
 
-      // Vodeni zig se puni odozgo nadole prema tome koliko je strana odskrolovana.
+      // Vodeni zig klizi paralaksno: natpis je duzi od ekrana, pa se tokom
+      // skrolovanja prevuce od prvog do poslednjeg slova. Na vrhu strane vidi
+      // se pocetak, na dnu kraj, tako da se procita ceo.
       const wm = document.querySelector<HTMLElement>('.cen-watermark');
       if (wm && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const EDGE = 40; // koliko natpis odmakne od ivice ekrana
         let wmRaf = 0;
         const paint = () => {
-          const max = document.documentElement.scrollHeight - window.innerHeight;
-          const p = max > 0 ? Math.min(Math.max(window.scrollY / max, 0), 1) : 1;
-          // krene od 8% da se vidi da nije prazno, zavrsi na 100%
-          wm.style.setProperty('--wm', (8 + p * 92).toFixed(1) + '%');
+          const vh = window.innerHeight;
+          const len = wm.offsetHeight; // u vertikalnom rezimu visina je duzina natpisa
+          const max = document.documentElement.scrollHeight - vh;
+          const p = max > 0 ? Math.min(Math.max(window.scrollY / max, 0), 1) : 0;
+
+          // Prirodni vrh natpisa kada je centriran: vh/2 - len/2.
+          // Start: vrh na EDGE. Kraj: dno na vh - EDGE.
+          const start = EDGE - (vh / 2 - len / 2);
+          const travel = Math.max(0, len - vh + EDGE * 2);
+          wm.style.setProperty('--wmY', (start - p * travel).toFixed(1) + 'px');
+          // blagi bocni pomak da se oseti dubina
+          wm.style.setProperty('--wmX', (-6 + p * 12).toFixed(1) + 'px');
         };
         const onWmScroll = () => {
           if (wmRaf) return;
@@ -330,6 +342,9 @@ const description =
         window.addEventListener('scroll', onWmScroll, { passive: true });
         window.addEventListener('resize', onWmScroll, { passive: true });
         paint();
+        // Duzina natpisa zavisi od fonta. Prvi paint ide pre nego sto se
+        // Archivo ucita, pa se mora ponoviti kad font stigne.
+        document.fonts?.ready.then(paint);
       }
 
       // Fade-up za grupe cenovnika.

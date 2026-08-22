@@ -83,42 +83,54 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
       )}
       <a href={ctaHref} class="hdr-cta" style="background:#FECB0F; color:#070707; font:700 13px Archivo,sans-serif; padding:11px 18px; flex:none">Zatražite ponudu</a>
       <button type="button" class="cone-btn" id="hdr-cone" aria-expanded="false" aria-controls="hdr-menu" aria-label="Meni">
-        <svg class="cone" viewBox="0 0 44 44" aria-hidden="true">
+        <svg class="cone" viewBox="0 0 48 48" aria-hidden="true">
           <defs>
             <linearGradient id="cone-gy" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stop-color="#7d5f04"></stop>
-              <stop offset=".3" stop-color="#d9a90c"></stop>
-              <stop offset=".46" stop-color="#FECB0F"></stop>
-              <stop offset=".52" stop-color="#ffe27a"></stop>
-              <stop offset=".6" stop-color="#FECB0F"></stop>
-              <stop offset=".82" stop-color="#c79a09"></stop>
-              <stop offset="1" stop-color="#6e5403"></stop>
+              <stop offset="0" stop-color="#9a7206"></stop><stop offset=".28" stop-color="#e0ab0b"></stop>
+              <stop offset=".5" stop-color="#FECB0F"></stop><stop offset=".56" stop-color="#ffdf6e"></stop>
+              <stop offset=".66" stop-color="#FECB0F"></stop><stop offset=".85" stop-color="#cf9d0a"></stop>
+              <stop offset="1" stop-color="#8a6605"></stop>
             </linearGradient>
             <linearGradient id="cone-gw" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stop-color="#8f8f8f"></stop>
-              <stop offset=".32" stop-color="#e8e8e8"></stop>
-              <stop offset=".5" stop-color="#ffffff"></stop>
-              <stop offset=".68" stop-color="#e0e0e0"></stop>
-              <stop offset="1" stop-color="#858585"></stop>
+              <stop offset="0" stop-color="#b9b9b9"></stop><stop offset=".3" stop-color="#eeeeee"></stop>
+              <stop offset=".5" stop-color="#ffffff"></stop><stop offset=".7" stop-color="#e6e6e6"></stop>
+              <stop offset="1" stop-color="#adadad"></stop>
             </linearGradient>
-            <linearGradient id="cone-gb" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#e7b70d"></stop>
-              <stop offset=".5" stop-color="#c1950a"></stop>
-              <stop offset="1" stop-color="#8a6a05"></stop>
+            <linearGradient id="cone-gp" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f6c60f"></stop><stop offset="1" stop-color="#bd930a"></stop>
+            </linearGradient>
+            <linearGradient id="cone-gh" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#ffe27a"></stop><stop offset=".45" stop-color="#FECB0F"></stop>
+              <stop offset="1" stop-color="#d9a90c"></stop>
+            </linearGradient>
+            <linearGradient id="cone-gbr" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#e7b70d"></stop><stop offset="1" stop-color="#a07806"></stop>
             </linearGradient>
           </defs>
-          <ellipse class="cone-shadow" cx="22" cy="40.6" rx="15" ry="2" fill="#000" opacity=".35"></ellipse>
-          <g class="seg seg3">
-            <path d="M11.6 28 H32.4 L35 34 H9 Z" fill="url(#cone-gy)"></path>
-            <rect x="6" y="34" width="32" height="5" rx="1.8" fill="url(#cone-gb)"></rect>
+          <!-- postolje u perspektivi: debljina pa gornja ploha -->
+          <g class="plate">
+            <rect x="11" y="23.5" width="26" height="26" rx="7" fill="#6e5203" transform="translate(24 39) scale(1 .48) rotate(45) translate(-24 -36.5)"></rect>
+            <rect x="11" y="23.5" width="26" height="26" rx="7" fill="url(#cone-gp)" transform="translate(24 36.7) scale(1 .48) rotate(45) translate(-24 -36.5)"></rect>
           </g>
-          <g class="seg seg2">
-            <path d="M16.4 17 H27.6 L30.7 24 H13.3 Z" fill="url(#cone-gy)"></path>
-            <path d="M13.3 24 H30.7 L32.4 28 H11.6 Z" fill="url(#cone-gw)"></path>
+          <ellipse class="cone-shadow" cx="24" cy="36" rx="11.5" ry="2.7" fill="#000" opacity=".28"></ellipse>
+          <!-- telo kupe: zaobljen vrh, elipsasto dno, beli pojas prati obim -->
+          <g class="cone-core">
+            <path d="M14 35 C15 26.5 17.6 15.5 19.8 10.8 Q24 7.6 28.2 10.8 C30.4 15.5 33 26.5 34 35 A10 3 0 0 1 14 35 Z" fill="url(#cone-gy)"></path>
+            <path d="M16.5 28.2 Q24 30.6 31.5 28.2 L30.4 20.8 Q24 22.8 17.6 20.8 Z" fill="url(#cone-gw)"></path>
           </g>
-          <g class="seg seg1">
-            <path d="M22 4 L18.5 12 H25.5 Z" fill="url(#cone-gy)"></path>
-            <path d="M18.5 12 H25.5 L27.6 17 H16.4 Z" fill="url(#cone-gw)"></path>
+          <!-- slem: obod, kupola, greben, otvori -->
+          <g class="hat">
+            <g class="hat-in">
+              <ellipse cx="24" cy="14.3" rx="11" ry="3.4" fill="#8a6605"></ellipse>
+              <ellipse cx="24" cy="13.5" rx="11" ry="3.4" fill="url(#cone-gbr)"></ellipse>
+              <path d="M15.6 13 C15.6 5.9 19.1 2.6 24 2.6 C28.9 2.6 32.4 5.9 32.4 13 Q24 15.4 15.6 13 Z" fill="url(#cone-gh)"></path>
+              <path d="M21.6 3 Q24 2.1 26.4 3 L25.9 6.3 Q24 5.7 22.1 6.3 Z" fill="#ffe9a0" opacity=".85"></path>
+              <g fill="#8a6605" opacity=".8" transform="rotate(-14 29 5)">
+                <rect x="27" y="4.2" width="1.1" height="2" rx=".5"></rect>
+                <rect x="28.8" y="4.4" width="1.1" height="2" rx=".5"></rect>
+                <rect x="30.6" y="4.8" width="1.1" height="2" rx=".5"></rect>
+              </g>
+            </g>
           </g>
         </svg>
       </button>
@@ -168,26 +180,32 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
   .cone-btn:focus-visible { outline: 2px solid #FECB0F; outline-offset: 2px; }
   .cone { width: 38px; height: 38px; display: block; overflow: visible; }
 
-  /* Svaki segment kupe se odmota: pun okret unazad dok se rasteže u ravnu
-     traku. Otvoreno stanje izgleda kao sklopljena teleskopska kupa. */
-  .seg {
+  /* Slem odleti sa kupe kad se meni otvori i lebdi dok je otvoren;
+     na zatvaranju se vrati. Kupa blago odahne kad tezina ode. */
+  .hat {
     transform-box: fill-box;
     transform-origin: center;
-    transition: transform .62s cubic-bezier(.34, 1.38, .44, 1);
+    transition: transform .55s cubic-bezier(.34, 1.45, .45, 1);
   }
-  .seg1 { transition-delay: 0s; }
-  .seg2 { transition-delay: .07s; }
-  .seg3 { transition-delay: .14s; }
-  .cone-btn[aria-expanded="true"] .seg1 { transform: translateY(-1.5px) rotate(-360deg) scaleX(2.5) scaleY(.45); }
-  .cone-btn[aria-expanded="true"] .seg2 { transform: rotate(-360deg) scaleX(1.35) scaleY(.5); }
-  .cone-btn[aria-expanded="true"] .seg3 { transform: translateY(1.5px) rotate(-360deg) scaleX(.88) scaleY(.55); }
-
-  .cone-shadow {
+  .cone-btn[aria-expanded="true"] .hat { transform: translate(-2px, -7px) rotate(-16deg); }
+  .hat-in {
     transform-box: fill-box;
     transform-origin: center;
-    transition: transform .62s ease, opacity .62s ease;
+    transform: rotate(-6deg);
   }
-  .cone-btn[aria-expanded="true"] .cone-shadow { transform: scaleX(1.18); opacity: .16; }
+  .cone-btn[aria-expanded="true"] .hat-in { animation: hatFloat 2.2s ease-in-out .55s infinite alternate; }
+  @keyframes hatFloat {
+    from { transform: rotate(-6deg) translateY(0); }
+    to { transform: rotate(-6deg) translateY(-1.2px); }
+  }
+  .cone-core {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    transition: transform .55s cubic-bezier(.34, 1.45, .45, 1);
+  }
+  .cone-btn[aria-expanded="true"] .cone-core { transform: scaleY(1.04); }
+  .cone-shadow { transition: opacity .55s ease; }
+  .cone-btn[aria-expanded="true"] .cone-shadow { opacity: .2; }
 
   /* ---- meni preko celog ekrana, otvara se kružno iz kupe ---- */
   .cone-menu {
@@ -278,7 +296,7 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .seg, .cone-shadow, .cone-menu, .cone-menu-grid a, .cone-menu-foot { transition: none !important; }
+    .hat, .hat-in, .cone-core, .cone-shadow, .cone-menu, .cone-menu-grid a, .cone-menu-foot { transition: none !important; animation: none !important; }
   }
 </style>
 

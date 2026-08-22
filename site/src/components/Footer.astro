@@ -57,9 +57,11 @@ const updated = '21.08.2026.';
 </footer>
 
 <button type="button" class="to-top" id="to-top">
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <path d="M12 19V5"></path><path d="m5 12 7-7 7 7"></path>
-  </svg>
+  <span class="chip">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 19V6"></path><path d="m6 12 6-6 6 6"></path>
+    </svg>
+  </span>
   <span class="to-top-sr">Nazad na vrh</span>
 </button>
 
@@ -76,34 +78,35 @@ const updated = '21.08.2026.';
     bottom: 20px;
     /* Ispod menija kupe (59) i trake (60), pa ga otvoren meni prekrije. */
     z-index: 40;
-    width: 48px;
-    height: 48px;
+    /* Meta za prst ostaje 44px, ali se vidi samo manji kvadrat unutra. */
+    width: 44px;
+    height: 44px;
     display: grid;
     place-items: center;
     padding: 0;
     border: none;
-    background: #FECB0F;
-    color: #070707;
+    background: none;
+    color: #FECB0F;
     cursor: pointer;
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(10px);
     pointer-events: none;
-    transition: opacity .3s ease, transform .3s ease, background .2s ease;
+    transition: opacity .3s ease, transform .3s ease;
     -webkit-tap-highlight-color: transparent;
   }
-  /* Traka upozorenja na gornjoj ivici, isti motiv kao znak u zaglavlju. */
-  .to-top::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    height: 5px;
-    background: repeating-linear-gradient(135deg, #070707 0 4px, transparent 4px 8px);
+  /* Vidljivi znak: tanak okvir na tamnoj podlozi, radi i na svetloj strani. */
+  .to-top span.chip {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    background: #070707;
+    border: 1px solid rgba(254, 203, 15, .34);
+    transition: background .2s ease, border-color .2s ease, color .2s ease;
   }
   .to-top.on { opacity: 1; transform: none; pointer-events: auto; }
-  .to-top:hover { background: #fff; }
-  .to-top:focus-visible { outline: 2px solid #FECB0F; outline-offset: 3px; }
+  .to-top:hover span.chip { background: #FECB0F; border-color: #FECB0F; color: #070707; }
+  .to-top:focus-visible { outline: 2px solid #FECB0F; outline-offset: 1px; }
   /* Naziv je pravi tekst, ne aria-label, da ga prebacivanje pisma prevede. */
   .to-top-sr {
     position: absolute;
@@ -114,7 +117,7 @@ const updated = '21.08.2026.';
     white-space: nowrap;
   }
   @media (max-width: 560px) {
-    .to-top { right: 14px; bottom: 14px; width: 44px; height: 44px; }
+    .to-top { right: 10px; bottom: 10px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .to-top { transition: none; }

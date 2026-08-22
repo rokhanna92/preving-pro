@@ -37,6 +37,15 @@ function estimate(s: typeof defaults) {
 
 const initial = estimate(defaults);
 
+// Naslovni blok: brojevi se izvode iz podataka, ne kucaju se rucno.
+const meta = {
+  izdanje: '2026/27',
+  grupa: String(groups.length).padStart(2, '0'),
+  stavki: String(groups.reduce((n, g) => n + g.stavke.length, 0)).padStart(2, '0'),
+  valuta: 'RSD',
+  pdv: 'BEZ PDV-a',
+};
+
 const title = 'Cenovnik 2026/27 · Preving Pro';
 const description =
   'Objavljeni cenovnik za BZR, zaštitu od požara, koordinaciju gradilišta i obuke. Cene su u dinarima, bez PDV-a, sa procenom troška za vašu firmu.';
@@ -89,52 +98,49 @@ const description =
         tr.pr td{font-size:13.5px !important}
       }
 
-      /* Vodeni zig uz desnu ivicu. writing-mode umesto rotate(90deg): kutija
-         elementa je uska i visoka, pa right:0 radi bez racunanja sirine teksta. */
-      .cen-watermark{
-        --wmY: 0px; --wmX: 0px;
-        position:fixed; right:10px; top:50%;
-        transform:translateY(calc(-50% + var(--wmY)));
-        writing-mode:vertical-rl; text-orientation:mixed;
-        font:700 196px 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.04em;
-        white-space:nowrap;
-        pointer-events:none; user-select:none;
-        /* Ispod pozadina sekcija: tamne sekcije ga sakriju, pa se vidi samo
-           na svetlom telu strane. */
-        z-index:0;
-        will-change:transform;
-        color:rgba(7,7,7,.104);
-      }
-      /* Iznad 1510px staje u prazninu desno od kontejnera, pa se centrira
-         izmedu ivice kontejnera (50% + 540px) i ivice prozora. */
-      @media (min-width:1510px){
-        .cen-watermark{
-          right:auto; left:calc(75% + 270px);
-          transform:translate(calc(-50% + var(--wmX)), calc(-50% + var(--wmY)));
-        }
-      }
-      /* Od 1790px ima mesta i pored najsire sekcije (1360px), pa se natpis
-         centrira izmedu njene ivice (50% + 680px) i ivice prozora. */
-      @media (min-width:1790px){
-        .cen-watermark{ left:calc(75% + 340px); }
-      }
-      @media (max-width:900px){.cen-watermark{font-size:132px; right:4px}}
-      @media (max-width:520px){.cen-watermark{font-size:96px}}
-      /* Bez pomeranja: prikazi sredinu natpisa, staticno. */
-      @media (prefers-reduced-motion:reduce){.cen-watermark{--wmY:0px; --wmX:0px}}
+      /* ---- Mehanicki brojac: cifre se kotrljaju kao na meracu protoka ---- */
+      .odo{display:inline-flex;align-items:baseline;line-height:1}
+      .odo-d{display:inline-block;width:1ch;height:1em;overflow:hidden;line-height:1;vertical-align:baseline}
+      .odo-strip{display:block;transition:transform .55s cubic-bezier(.2,.85,.25,1)}
+      .odo-strip span{display:block;height:1em;line-height:1;text-align:center}
+      .odo-sep{display:inline-block}
+      @media (prefers-reduced-motion:reduce){.odo-strip{transition:none}}
+
+      /* ---- Tabele kao list specifikacije ---- */
+      .sheet{border:1px solid rgba(7,7,7,.16);background:#fff;box-shadow:0 1px 0 rgba(7,7,7,.04)}
+      .sheet-head{display:flex;justify-content:space-between;align-items:center;background:#070707;color:#FECB0F;padding:11px 16px;font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.18em}
+      .sheet-head b{color:rgba(255,255,255,.45);font-weight:600}
+      .pr-idx{width:1%;white-space:nowrap;text-align:right;font:600 11px 'IBM Plex Mono',monospace;color:rgba(7,7,7,.32);padding:13px 0 13px 16px;border-bottom:1px solid rgba(7,7,7,.09);vertical-align:top}
+      tr.pr:last-child th,tr.pr:last-child td{border-bottom:none}
+      /* Plava mreza iza tabela: isti motiv kao sekcija Rokovi na pocetnoj. */
+      .grid-bg{background-image:linear-gradient(rgba(7,7,7,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(7,7,7,.055) 1px,transparent 1px);background-size:56px 56px}
+
+      /* ---- Naslovni blok, kao zaglavlje tehnickog crteza ---- */
+      .titleblock{display:flex;flex-wrap:wrap;border:1px solid rgba(255,255,255,.18);margin-top:34px}
+      .titleblock div{flex:1 1 150px;padding:11px 16px;border-right:1px solid rgba(255,255,255,.18)}
+      .titleblock div:last-child{border-right:none}
+      .titleblock dt{margin:0;font:600 9.5px 'IBM Plex Mono',monospace;letter-spacing:.2em;color:rgba(255,255,255,.42)}
+      .titleblock dd{margin:5px 0 0;font:600 13px 'IBM Plex Mono',monospace;color:#FECB0F;font-variant-numeric:tabular-nums}
+      @media (max-width:560px){.titleblock div{flex:1 1 50%;border-bottom:1px solid rgba(255,255,255,.18)}}
     </style>
   </head>
   <body>
     <div id="pg-cenovnik">
       <Header variant="inner" active="/cenovnik" banner="dark" />
 
-      <div class="cen-watermark" aria-hidden="true">CENOVNIK 2026/27</div>
-
       <section style="background:#070707; color:#F2F1EC; padding:80px 32px 72px; position:relative">
         <div style="max-width:1360px; margin:0 auto">
           <p style="margin:0 0 20px; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.2em"><a href="/" class="crumb-a" style="color:rgba(255,255,255,.45)">POČETNA</a> / <span style="color:#FECB0F">CENOVNIK 2026/27</span></p>
           <h1 style="margin:0; font:700 clamp(38px,4.6vw,68px)/1 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:-.035em; color:#fff">Cene bez iznenađenja.</h1>
           <p style="margin:22px 0 0; font:400 17px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.68); max-width:58ch">Objavljujemo cenovnik. U ovom poslu to gotovo niko ne radi, a mi mislimo da je to prvi test poverenja. Cene su u dinarima, bez PDV-a, informativne: tačna ponuda stiže u roku od jednog radnog dana.</p>
+
+          <dl class="titleblock">
+            <div><dt>IZDANJE</dt><dd>{meta.izdanje}</dd></div>
+            <div><dt>GRUPA</dt><dd>{meta.grupa}</dd></div>
+            <div><dt>STAVKI</dt><dd>{meta.stavki}</dd></div>
+            <div><dt>VALUTA</dt><dd>{meta.valuta}</dd></div>
+            <div><dt>PDV</dt><dd>{meta.pdv}</dd></div>
+          </dl>
         </div>
       </section>
 
@@ -182,7 +188,7 @@ const description =
             </div>
             <div style="margin-top:auto; padding-top:24px">
               <p style="margin:0; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.18em; color:rgba(255,255,255,.5)">JEDNOKRATNO, UVOĐENJE U SISTEM</p>
-              <p style="margin:6px 0 16px; font:700 clamp(30px,3vw,44px) 'IBM Plex Mono',monospace; color:#FECB0F; font-variant-numeric:tabular-nums; letter-spacing:-.01em">od <span id="est-oneoff">{initial.oneOff}</span> <span style="font:500 14px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.5)">RSD</span></p>
+              <p style="margin:6px 0 16px; font:700 clamp(30px,3vw,44px) 'IBM Plex Mono',monospace; color:#FECB0F; font-variant-numeric:tabular-nums; letter-spacing:-.01em">od <span class="odo" id="est-oneoff" data-no-cyr>{initial.oneOff}</span> <span style="font:500 14px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.5)">RSD</span></p>
               <p style="margin:0; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.18em; color:rgba(255,255,255,.5)">ZATIM MESEČNO</p>
               <p id="est-monthly" style="margin:6px 0 0; font:700 clamp(24px,2.2vw,32px) 'IBM Plex Mono',monospace; color:#fff; font-variant-numeric:tabular-nums">{initial.monthly}</p>
               <p style="margin:18px 0 0; font:400 12.5px/1.55 'IBM Plex Sans',system-ui,sans-serif; color:rgba(255,255,255,.45)">Informativna procena po važećem cenovniku. Tačna cena zavisi od delatnosti i stanja dokumentacije.</p>
@@ -192,17 +198,18 @@ const description =
         </div>
       </section>
 
-      <section style="padding:88px 32px 40px; position:relative">
+      <section class="grid-bg" style="padding:88px 32px 40px; position:relative">
         <div style="max-width:1080px; margin:0 auto">
           {groups.map((g) => (
-            <div data-fd style="margin-bottom:44px">
-              <div style="display:flex; justify-content:space-between; align-items:center; background:#070707; color:#FECB0F; padding:12px 18px; font:600 12px 'IBM Plex Mono',monospace; letter-spacing:.18em"><span>{g.naziv}</span><span style="color:rgba(255,255,255,.45)">{g.oznaka}</span></div>
-              <table style="width:100%; border-collapse:collapse; background:#fff; border:1px solid rgba(7,7,7,.15); border-top:none">
+            <div data-fd class="sheet" style="margin-bottom:36px">
+              <div class="sheet-head"><span>{g.naziv}</span><b>{g.oznaka}</b></div>
+              <table style="width:100%; border-collapse:collapse">
                 <tbody>
-                  {g.stavke.map((r) => (
+                  {g.stavke.map((r, i) => (
                     <tr class="pr">
-                      <th scope="row" style="text-align:left; font:400 15px 'IBM Plex Sans',system-ui,sans-serif; padding:13px 18px; border-bottom:1px solid rgba(7,7,7,.1)">{r.n}<span style="display:block; font:400 12.5px 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.5); margin-top:2px">{r.d}</span></th>
-                      <td style="text-align:right; font:700 15px 'IBM Plex Mono',monospace; padding:13px 18px; border-bottom:1px solid rgba(7,7,7,.1); white-space:nowrap; font-variant-numeric:tabular-nums">{r.c}</td>
+                      <td class="pr-idx">{String(i + 1).padStart(2, '0')}</td>
+                      <th scope="row" style="text-align:left; font:400 15px 'IBM Plex Sans',system-ui,sans-serif; padding:13px 16px; border-bottom:1px solid rgba(7,7,7,.09)">{r.n}<span style="display:block; font:400 12.5px 'IBM Plex Sans',system-ui,sans-serif; color:rgba(7,7,7,.5); margin-top:2px">{r.d}</span></th>
+                      <td style="text-align:right; font:700 15px 'IBM Plex Mono',monospace; padding:13px 16px; border-bottom:1px solid rgba(7,7,7,.09); white-space:nowrap; font-variant-numeric:tabular-nums">{r.c}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -241,6 +248,48 @@ const description =
 
       const rowsBox = document.getElementById('est-rows');
       const oneOffBox = document.getElementById('est-oneoff');
+
+      // Mehanicki brojac: svaka cifra je kolona 0-9 koja se pomera na svoju
+      // vrednost, pa se ukupan iznos "prevrne" kao na meracu.
+      const odoShape = (t: string) => [...t].map((c) => (/\d/.test(c) ? 'd' : c)).join('');
+      let odoLast = '';
+      const setOdometer = (el: HTMLElement, text: string) => {
+        const shape = odoShape(text);
+        if (shape !== odoLast) {
+          odoLast = shape;
+          el.textContent = '';
+          for (const ch of text) {
+            if (/\d/.test(ch)) {
+              const col = document.createElement('span');
+              col.className = 'odo-d';
+              const strip = document.createElement('span');
+              strip.className = 'odo-strip';
+              for (let i = 0; i < 10; i++) {
+                const d = document.createElement('span');
+                d.textContent = String(i);
+                strip.appendChild(d);
+              }
+              col.appendChild(strip);
+              el.appendChild(col);
+            } else {
+              const sep = document.createElement('span');
+              sep.className = 'odo-sep';
+              sep.textContent = ch;
+              el.appendChild(sep);
+            }
+          }
+        }
+        [...text].forEach((ch, i) => {
+          const node = el.children[i] as HTMLElement | undefined;
+          if (!node) return;
+          if (/\d/.test(ch)) {
+            const strip = node.firstElementChild as HTMLElement | null;
+            if (strip) strip.style.transform = `translateY(-${ch}em)`;
+          } else {
+            node.textContent = ch;
+          }
+        });
+      };
       const monthlyBox = document.getElementById('est-monthly');
 
       const makeRow = (k: string, v: string) => {
@@ -274,7 +323,7 @@ const description =
           oneOff += state.zaposleni * rates.obukaPoRadniku;
         }
         if (rowsBox) rowsBox.replaceChildren(...rows.map(([k, v]) => makeRow(k, v)));
-        if (oneOffBox) oneOffBox.textContent = fmt(oneOff);
+        if (oneOffBox) setOdometer(oneOffBox, fmt(oneOff));
         if (monthlyBox) {
           monthlyBox.textContent =
             state.pausal === 'ne'
@@ -312,48 +361,16 @@ const description =
         });
       });
 
+      // Prvi prolaz pretvara server-renderovani iznos u kolone brojaca, da
+      // prva izmena vec ima od cega da se kotrlja.
+      render();
+
       // Odbrojavanje se u mokapu računa jednom, pri učitavanju.
       const target = Date.parse('2027-01-01T00:00:00+01:00');
       const days = String(Math.max(0, Math.floor((target - Date.now()) / 864e5)));
       document.querySelectorAll<HTMLElement>('[data-cd="days"]').forEach((el) => {
         if (el.textContent !== days) el.textContent = days;
       });
-
-      // Vodeni zig klizi paralaksno: natpis je duzi od ekrana, pa se tokom
-      // skrolovanja prevuce od prvog do poslednjeg slova. Na vrhu strane vidi
-      // se pocetak, na dnu kraj, tako da se procita ceo.
-      const wm = document.querySelector<HTMLElement>('.cen-watermark');
-      if (wm && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        const EDGE = 40; // koliko natpis odmakne od ivice ekrana
-        let wmRaf = 0;
-        const paint = () => {
-          const vh = window.innerHeight;
-          const len = wm.offsetHeight; // u vertikalnom rezimu visina je duzina natpisa
-          const max = document.documentElement.scrollHeight - vh;
-          const p = max > 0 ? Math.min(Math.max(window.scrollY / max, 0), 1) : 0;
-
-          // Prirodni vrh natpisa kada je centriran: vh/2 - len/2.
-          // Start: vrh na EDGE. Kraj: dno na vh - EDGE.
-          const start = EDGE - (vh / 2 - len / 2);
-          const travel = Math.max(0, len - vh + EDGE * 2);
-          wm.style.setProperty('--wmY', (start - p * travel).toFixed(1) + 'px');
-          // blagi bocni pomak da se oseti dubina
-          wm.style.setProperty('--wmX', (-6 + p * 12).toFixed(1) + 'px');
-        };
-        const onWmScroll = () => {
-          if (wmRaf) return;
-          wmRaf = requestAnimationFrame(() => {
-            wmRaf = 0;
-            paint();
-          });
-        };
-        window.addEventListener('scroll', onWmScroll, { passive: true });
-        window.addEventListener('resize', onWmScroll, { passive: true });
-        paint();
-        // Duzina natpisa zavisi od fonta. Prvi paint ide pre nego sto se
-        // IBM Plex Sans ucita, pa se mora ponoviti kad font stigne.
-        document.fonts?.ready.then(paint);
-      }
 
       // Fade-up za grupe cenovnika.
       const fade = document.querySelectorAll<HTMLElement>('[data-fd]');

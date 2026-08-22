@@ -40,8 +40,8 @@ const navStyle = inner
   ? "display:flex; gap:26px; flex-wrap:wrap; justify-content:center; font:500 12.5px 'IBM Plex Mono',monospace"
   : "display:flex; gap:26px; flex-wrap:wrap; justify-content:center; font:500 12.5px 'IBM Plex Mono',monospace; letter-spacing:.02em";
 const bannerStyle = darkBanner
-  ? 'background:#070707; color:#FFEF41; display:flex; align-items:center; justify-content:center; gap:20px; flex-wrap:wrap; padding:9px 20px; text-align:center'
-  : 'background:#FFEF41; color:#070707; display:flex; align-items:center; justify-content:center; gap:20px; flex-wrap:wrap; padding:9px 20px; text-align:center';
+  ? 'background:#070707; color:#FECB0F; display:flex; align-items:center; justify-content:center; gap:20px; flex-wrap:wrap; padding:9px 20px; text-align:center'
+  : 'background:#FECB0F; color:#070707; display:flex; align-items:center; justify-content:center; gap:20px; flex-wrap:wrap; padding:9px 20px; text-align:center';
 const bannerLinkStyle = darkBanner
   ? "font:700 11.5px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.75); text-decoration:underline; text-underline-offset:3px"
   : "font:700 11.5px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:#070707; text-decoration:underline; text-underline-offset:3px";
@@ -54,34 +54,34 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
 {showBanner && (
 <div style={bannerStyle}>
   <span style="font:600 11.5px 'IBM Plex Mono',monospace; letter-spacing:.14em">ČETIRI NOVA PRAVILNIKA SE PRIMENJUJU OD 01.01.2027. · JOŠ <span data-cd="days">{days}</span> DANA</span>
-  <a href={bannerHref} style={bannerLinkStyle}>PROVERITE OBAVEZE →</a>
+  <a href={bannerHref} class="hdr-banner-a" style={bannerLinkStyle}>PROVERITE OBAVEZE →</a>
 </div>
 )}
 
-<div style="position:sticky; top:0; z-index:60; background:rgba(4,4,4,.92); backdrop-filter:blur(10px); border-bottom:1px solid rgba(255,239,65,.16)">
-  <div style="max-width:1360px; margin:0 auto; padding:0 32px; height:64px; display:flex; align-items:center; justify-content:space-between; gap:24px">
+<div style="position:sticky; top:0; z-index:60; background:rgba(4,4,4,.92); backdrop-filter:blur(10px); border-bottom:1px solid rgba(254,203,15,.16)">
+  <div class="hdr-bar" style="max-width:1360px; margin:0 auto; padding:0 32px; height:64px; display:flex; align-items:center; justify-content:space-between; gap:24px">
     <a href={logoHref} class="hdr-logo" style="display:flex; align-items:center; gap:11px; flex:none; color:#fff">
       <span style="width:28px; height:28px; position:relative; display:block">
-        <span style="position:absolute; left:0; top:0; width:28px; height:8px; background:repeating-linear-gradient(135deg,#FFEF41 0 4px,#070707 4px 8px); border:1px solid #FFEF41; box-sizing:border-box"></span>
-        <span style="position:absolute; left:0; top:8px; width:8px; height:20px; background:#FFEF41"></span>
-        <span style="position:absolute; right:0; top:8px; width:8px; height:20px; background:#FFEF41"></span>
+        <span style="position:absolute; left:0; top:0; width:28px; height:8px; background:repeating-linear-gradient(135deg,#FECB0F 0 4px,#070707 4px 8px); border:1px solid #FECB0F; box-sizing:border-box"></span>
+        <span style="position:absolute; left:0; top:8px; width:8px; height:20px; background:#FECB0F"></span>
+        <span style="position:absolute; right:0; top:8px; width:8px; height:20px; background:#FECB0F"></span>
       </span>
-      <span style="font:800 16.5px Archivo,sans-serif; color:#fff; letter-spacing:-.01em">PREVING<span style="color:#FFEF41">PRO</span></span>
+      <span style="font:800 16.5px Archivo,sans-serif; color:#fff; letter-spacing:-.01em">PREVING<span style="color:#FECB0F">PRO</span></span>
     </a>
-    <nav style={navStyle}>
+    <nav class="hdr-nav" style={navStyle}>
       {nav.map((item) => (
-        <a href={item.href} class="hdr-a" style={item.href === active ? 'color:#FFEF41' : 'color:rgba(255,255,255,.75)'}><span style="color:rgba(255,239,65,.6)">{item.n}</span> {item.label}</a>
+        <a href={item.href} class="hdr-a" style={item.href === active ? 'color:#FECB0F' : 'color:rgba(255,255,255,.75)'}><span style="color:rgba(254,203,15,.6)">{item.n}</span> {item.label}</a>
       ))}
     </nav>
-    <div style="display:flex; align-items:center; gap:16px; flex:none">
+    <div class="hdr-right" style="display:flex; align-items:center; gap:16px; flex:none">
       {!inner && (
-        <span style="display:flex; align-items:center; gap:5px; font:500 11px 'IBM Plex Mono',monospace">
+        <span class="hdr-scripts" style="display:flex; align-items:center; gap:5px; font:500 11px 'IBM Plex Mono',monospace">
           <button type="button" data-script-btn="cir" style="all:unset; cursor:pointer; padding:12px 2px; color:rgba(255,255,255,.5)">ЋИР</button>
           <span style="color:rgba(255,255,255,.3)">/</span>
-          <button type="button" data-script-btn="lat" style="all:unset; cursor:pointer; padding:12px 2px; color:#FFEF41; text-decoration:underline; text-underline-offset:4px">LAT</button>
+          <button type="button" data-script-btn="lat" style="all:unset; cursor:pointer; padding:12px 2px; color:#FECB0F; text-decoration:underline; text-underline-offset:4px">LAT</button>
         </span>
       )}
-      <a href={ctaHref} class="hdr-cta" style="background:#FFEF41; color:#070707; font:700 13px Archivo,sans-serif; padding:11px 18px; flex:none">Zatražite ponudu</a>
+      <a href={ctaHref} class="hdr-cta" style="background:#FECB0F; color:#070707; font:700 13px Archivo,sans-serif; padding:11px 18px; flex:none">Zatražite ponudu</a>
     </div>
   </div>
 </div>
@@ -90,7 +90,38 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
   /* Own hover rules, so the bar behaves the same on dark and light pages.
      !important is required: the base colors sit in inline style attributes,
      which otherwise win over any stylesheet rule. */
-  .hdr-a:hover { color: #FFEF41 !important; text-decoration: none !important; }
+  .hdr-a:hover { color: #FECB0F !important; text-decoration: none !important; }
   .hdr-logo:hover { text-decoration: none !important; }
   .hdr-cta:hover { background: #fff !important; color: #070707 !important; text-decoration: none !important; }
+
+  /* Ispod 900px traka se prelama u dva reda: logo i dugme gore, navigacija ispod.
+     !important je obavezan jer osnovne vrednosti stoje u inline style atributima. */
+  @media (max-width: 900px) {
+    .hdr-bar {
+      height: auto !important;
+      padding: 10px 20px !important;
+      flex-wrap: wrap !important;
+      gap: 6px 12px !important;
+    }
+    .hdr-nav {
+      order: 3;
+      width: 100%;
+      justify-content: flex-start !important;
+      gap: 0 18px !important;
+    }
+    /* Prstu treba veća meta od 14px reda teksta. */
+    .hdr-nav a { padding: 10px 0; }
+    .hdr-logo { padding: 4px 0; }
+  }
+
+  @media (max-width: 460px) {
+    .hdr-bar { padding: 8px 16px !important; }
+    .hdr-nav { gap: 0 14px !important; font-size: 11.5px !important; }
+    .hdr-scripts { display: none !important; }
+    .hdr-cta { padding: 11px 14px !important; font-size: 12px !important; }
+  }
+
+  @media (max-width: 900px) {
+    .hdr-banner-a { display: inline-block; padding: 7px 0; }
+  }
 </style>

@@ -1,0 +1,72 @@
+/* Zajednička pravila za male ekrane.
+   !important je obavezan svuda gde osnovna vrednost stoji u inline style
+   atributu, jer inline pobeđuje svako pravilo iz stilova. */
+
+/* Tableti i uži laptopi. */
+@media (max-width: 900px) {
+  section {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  footer {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+}
+
+/* Telefoni. */
+@media (max-width: 640px) {
+  section {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+    padding-top: 56px !important;
+    padding-bottom: 56px !important;
+  }
+  footer {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+    padding-top: 44px !important;
+  }
+
+  /* Vodoravni razmaci u flex redovima postaju preveliki na uskom ekranu. */
+  .stack-sm {
+    gap: 28px !important;
+  }
+}
+
+/* Najuži telefoni. */
+@media (max-width: 380px) {
+  section {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+  footer {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+}
+
+/* Kontrole forme moraju biti dovoljno velike za prst. */
+@media (max-width: 900px) {
+  input[type='checkbox'] {
+    width: 22px !important;
+    height: 22px !important;
+  }
+  input[type='range'] {
+    height: 28px;
+  }
+  select,
+  input[type='text'],
+  textarea {
+    font-size: 16px !important; /* ispod 16px iOS zumira polje pri fokusu */
+  }
+}
+
+/* Nikad ne dozvoli da slika ili ugrađeni sadržaj probije okvir. */
+img,
+svg,
+canvas,
+video,
+table {
+  max-width: 100%;
+}

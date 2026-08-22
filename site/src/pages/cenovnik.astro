@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import cenovnik from '../data/cenovnik.json';
+import '../styles/responsive.css';
 
 const { groups, note, estimator } = cenovnik;
 const { defaults, limits, rates, labels, pausalOpts, checkboxes } = estimator;
@@ -62,24 +63,24 @@ const description =
       body{margin:0;background:#EFEDE6;font-family:Archivo,system-ui,sans-serif;color:#070707;-webkit-font-smoothing:antialiased;text-wrap:pretty}
       a{color:#070707;text-decoration:none}
       a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
-      ::selection{background:#070707;color:#FFEF41}
+      ::selection{background:#070707;color:#FECB0F}
       @keyframes blink{0%,45%{opacity:1}50%,95%{opacity:.12}100%{opacity:1}}
       [data-fd]{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
       .fd-on{opacity:1 !important;transform:none !important}
-      tr.pr:hover td, tr.pr:hover th{background:#FFEF41 !important}
-      input[type=range]{accent-color:#FFEF41}
-      input[type=checkbox]{accent-color:#FFEF41}
+      tr.pr:hover td, tr.pr:hover th{background:#FECB0F !important}
+      input[type=range]{accent-color:#FECB0F}
+      input[type=checkbox]{accent-color:#FECB0F}
       @media (prefers-reduced-motion:reduce){[data-fd]{opacity:1;transform:none;transition:none}}
 
       /* !important je obavezan: osnovne boje su u inline style atributima,
          koji inače pobeđuju svako pravilo iz stilova. */
-      .crumb-a:hover{color:#FFEF41 !important;text-decoration:none !important}
+      .crumb-a:hover{color:#FECB0F !important;text-decoration:none !important}
       .btn-y:hover{background:#fff !important;text-decoration:none !important}
       .btn-dark:hover{background:#1c1c1c !important;text-decoration:none !important}
       .est-row{display:flex;justify-content:space-between;gap:18px;font:400 14px 'IBM Plex Mono',monospace;color:rgba(255,255,255,.72);border-bottom:1px dotted rgba(255,255,255,.22);padding:7px 0}
       .est-row span+span{white-space:nowrap}
       .pausal-opt{border:1px solid rgba(255,255,255,.3);background:transparent;color:rgba(255,255,255,.8);font:600 13px Archivo,sans-serif;padding:11px 18px;min-height:44px;cursor:pointer}
-      .pausal-opt[aria-pressed="true"]{border-color:#FFEF41;background:#FFEF41;color:#070707}
+      .pausal-opt[aria-pressed="true"]{border-color:#FECB0F;background:#FECB0F;color:#070707}
     </style>
   </head>
   <body>
@@ -90,7 +91,7 @@ const description =
 
       <section style="background:#070707; color:#F2F1EC; padding:80px 32px 72px; position:relative">
         <div style="max-width:1360px; margin:0 auto">
-          <p style="margin:0 0 20px; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.2em"><a href="/" class="crumb-a" style="color:rgba(255,255,255,.45)">POČETNA</a> / <span style="color:#FFEF41">CENOVNIK 2026/27</span></p>
+          <p style="margin:0 0 20px; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.2em"><a href="/" class="crumb-a" style="color:rgba(255,255,255,.45)">POČETNA</a> / <span style="color:#FECB0F">CENOVNIK 2026/27</span></p>
           <h1 style="margin:0; font:800 clamp(38px,4.6vw,68px)/1 Archivo,sans-serif; letter-spacing:-.035em; color:#fff">Cene bez iznenađenja.</h1>
           <p style="margin:22px 0 0; font:400 17px/1.55 Archivo,sans-serif; color:rgba(255,255,255,.68); max-width:58ch">Objavljujemo cenovnik. U ovom poslu to gotovo niko ne radi, a mi mislimo da je to prvi test poverenja. Cene su u dinarima, bez PDV-a, informativne: tačna ponuda stiže u roku od jednog radnog dana.</p>
         </div>
@@ -99,15 +100,15 @@ const description =
       <section style="background:#EFEDE6; padding:0 32px; position:relative; z-index:1">
         <div style="max-width:1360px; margin:-1px auto 0; background:#070707; color:#F2F1EC; transform:translateY(0); padding:38px 38px 34px; display:flex; flex-wrap:wrap; gap:44px; box-shadow:0 30px 60px rgba(7,7,7,.18)">
           <div style="flex:1 1 440px; min-width:0">
-            <p style="margin:0 0 4px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:#FFEF41">PROCENA / INTERAKTIVNO</p>
+            <p style="margin:0 0 4px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:#FECB0F">PROCENA / INTERAKTIVNO</p>
             <p style="margin:0 0 26px; font:800 26px Archivo,sans-serif; letter-spacing:-.02em; color:#fff">Koliko bi otprilike koštalo baš vama</p>
             <div style="display:grid; gap:22px">
               <label style="display:grid; gap:10px">
-                <span style="display:flex; justify-content:space-between; font:600 11.5px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.6)">BROJ RADNIH MESTA<span id="out-mesta" style="color:#FFEF41; font-size:14px">{defaults.mesta}</span></span>
+                <span style="display:flex; justify-content:space-between; font:600 11.5px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.6)">BROJ RADNIH MESTA<span id="out-mesta" style="color:#FECB0F; font-size:14px">{defaults.mesta}</span></span>
                 <input type="range" id="in-mesta" min={limits.mestaMin} max={limits.mestaMax} value={defaults.mesta} style="width:100%; cursor:pointer" />
               </label>
               <label style="display:grid; gap:10px">
-                <span style="display:flex; justify-content:space-between; font:600 11.5px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.6)">BROJ ZAPOSLENIH<span id="out-zaposleni" style="color:#FFEF41; font-size:14px">{defaults.zaposleni}</span></span>
+                <span style="display:flex; justify-content:space-between; font:600 11.5px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:rgba(255,255,255,.6)">BROJ ZAPOSLENIH<span id="out-zaposleni" style="color:#FECB0F; font-size:14px">{defaults.zaposleni}</span></span>
                 <input type="range" id="in-zaposleni" min={limits.zaposleniMin} max={limits.zaposleniMax} value={defaults.zaposleni} style="width:100%; cursor:pointer" />
               </label>
               <div style="display:grid; gap:12px; border-top:1px solid rgba(255,255,255,.14); padding-top:20px">
@@ -140,11 +141,11 @@ const description =
             </div>
             <div style="margin-top:auto; padding-top:24px">
               <p style="margin:0; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.18em; color:rgba(255,255,255,.5)">JEDNOKRATNO, UVOĐENJE U SISTEM</p>
-              <p style="margin:6px 0 16px; font:800 clamp(30px,3vw,44px) 'IBM Plex Mono',monospace; color:#FFEF41; font-variant-numeric:tabular-nums; letter-spacing:-.01em">od <span id="est-oneoff">{initial.oneOff}</span> <span style="font:500 14px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.5)">RSD</span></p>
+              <p style="margin:6px 0 16px; font:800 clamp(30px,3vw,44px) 'IBM Plex Mono',monospace; color:#FECB0F; font-variant-numeric:tabular-nums; letter-spacing:-.01em">od <span id="est-oneoff">{initial.oneOff}</span> <span style="font:500 14px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.5)">RSD</span></p>
               <p style="margin:0; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.18em; color:rgba(255,255,255,.5)">ZATIM MESEČNO</p>
               <p id="est-monthly" style="margin:6px 0 0; font:800 clamp(24px,2.2vw,32px) 'IBM Plex Mono',monospace; color:#fff; font-variant-numeric:tabular-nums">{initial.monthly}</p>
               <p style="margin:18px 0 0; font:400 12.5px/1.55 Archivo,sans-serif; color:rgba(255,255,255,.45)">Informativna procena po važećem cenovniku. Tačna cena zavisi od delatnosti i stanja dokumentacije.</p>
-              <a href="/kontakt" class="btn-y" style="display:inline-block; margin-top:16px; background:#FFEF41; color:#070707; font:700 14px Archivo,sans-serif; padding:13px 22px">Pretvorite u ponudu →</a>
+              <a href="/kontakt" class="btn-y" style="display:inline-block; margin-top:16px; background:#FECB0F; color:#070707; font:700 14px Archivo,sans-serif; padding:13px 22px">Pretvorite u ponudu →</a>
             </div>
           </div>
         </div>
@@ -154,7 +155,7 @@ const description =
         <div style="max-width:1080px; margin:0 auto">
           {groups.map((g) => (
             <div data-fd style="margin-bottom:44px">
-              <div style="display:flex; justify-content:space-between; align-items:center; background:#070707; color:#FFEF41; padding:12px 18px; font:600 12px 'IBM Plex Mono',monospace; letter-spacing:.18em"><span>{g.naziv}</span><span style="color:rgba(255,255,255,.45)">{g.oznaka}</span></div>
+              <div style="display:flex; justify-content:space-between; align-items:center; background:#070707; color:#FECB0F; padding:12px 18px; font:600 12px 'IBM Plex Mono',monospace; letter-spacing:.18em"><span>{g.naziv}</span><span style="color:rgba(255,255,255,.45)">{g.oznaka}</span></div>
               <table style="width:100%; border-collapse:collapse; background:#fff; border:1px solid rgba(7,7,7,.15); border-top:none">
                 <tbody>
                   {g.stavke.map((r) => (
@@ -172,12 +173,12 @@ const description =
       </section>
 
       <section style="padding:40px 32px 96px; position:relative">
-        <div style="max-width:1080px; margin:0 auto; background:#FFEF41; padding:34px 34px 30px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px">
+        <div style="max-width:1080px; margin:0 auto; background:#FECB0F; padding:34px 34px 30px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px">
           <div>
             <p style="margin:0; font:800 clamp(22px,2.4vw,30px)/1.15 Archivo,sans-serif; letter-spacing:-.02em">Pošaljite matični broj firme i broj zaposlenih.</p>
             <p style="margin:8px 0 0; font:400 15px/1.5 Archivo,sans-serif; color:rgba(7,7,7,.7)">Konkretna ponuda stiže isti radni dan, sa tačnim cenama umesto „od".</p>
           </div>
-          <a href="/kontakt" class="btn-dark" style="background:#070707; color:#FFEF41; font:700 15px Archivo,sans-serif; padding:16px 28px; flex:none">Zatražite ponudu</a>
+          <a href="/kontakt" class="btn-dark" style="background:#070707; color:#FECB0F; font:700 15px Archivo,sans-serif; padding:16px 28px; flex:none">Zatražite ponudu</a>
         </div>
       </section>
 

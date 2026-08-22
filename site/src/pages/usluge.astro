@@ -3,6 +3,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import usluge from '../data/usluge.json';
 import chips from '../data/price-chips.json';
+import '../styles/responsive.css';
 
 const { bzr, zop, koordinator, obuke } = usluge;
 
@@ -34,8 +35,8 @@ const description =
       html{scroll-behavior:smooth}
       body{margin:0;background:#040404;font-family:Archivo,system-ui,sans-serif;color:#F2F1EC;-webkit-font-smoothing:antialiased;text-wrap:pretty}
       a{color:#F2F1EC;text-decoration:none}
-      a:hover{color:#FFEF41}
-      ::selection{background:#FFEF41;color:#070707}
+      a:hover{color:#FECB0F}
+      ::selection{background:#FECB0F;color:#070707}
       @keyframes blink{0%,45%{opacity:1}50%,95%{opacity:.12}100%{opacity:1}}
       @keyframes dash{to{stroke-dashoffset:-48}}
       @keyframes needle{0%,100%{transform:rotate(-24deg)}50%{transform:rotate(26deg)}}
@@ -49,9 +50,12 @@ const description =
       /* !important je obavezan: osnovne boje su u inline style atributima,
          koji inače pobeđuju svako pravilo iz stilova. */
       .btn-y:hover{background:#fff !important;color:#070707 !important}
-      .btn-dark:hover{background:#1c1c1c !important;color:#FFEF41 !important}
-      .btn-outline:hover{background:#070707 !important;color:#FFEF41 !important}
-      .chip-link:hover{border-color:#FFEF41 !important;color:#FFEF41 !important}
+      .btn-dark:hover{background:#1c1c1c !important;color:#FECB0F !important}
+      .btn-outline:hover{background:#070707 !important;color:#FECB0F !important}
+      .chip-link:hover{border-color:#FECB0F !important;color:#FECB0F !important}
+
+      /* Na telefonu crtež cevovoda ide iza teksta pa mora da se povuče. */
+      @media (max-width:900px){.hero-pid{opacity:.22 !important}}
     </style>
   </head>
   <body>
@@ -59,26 +63,26 @@ const description =
       <Header variant="inner" active="/usluge" />
 
       <section style="position:relative; background:#040404; overflow:hidden; padding:88px 32px 64px">
-        <svg viewBox="0 0 640 420" preserveAspectRatio="xMaxYMid slice" style="position:absolute; right:0; top:0; height:100%; width:min(58vw,760px); opacity:.85" aria-hidden="true">
+        <svg class="hero-pid" viewBox="0 0 640 420" preserveAspectRatio="xMaxYMid slice" style="position:absolute; right:0; top:0; height:100%; width:min(58vw,760px); opacity:.85" aria-hidden="true">
           <path d="M-20 90 H320 V230 H660" fill="none" stroke="#222222" stroke-width="10"></path>
           <path d="M140 440 V150 H660" fill="none" stroke="#1c1c1c" stroke-width="10"></path>
           <path d="M-20 310 H430 V60 H660" fill="none" stroke="#262626" stroke-width="10"></path>
-          <path d="M-20 90 H320 V230 H660" fill="none" stroke="#FFEF41" stroke-width="2.4" stroke-dasharray="10 16" opacity=".75" style="animation:dash 1.5s linear infinite"></path>
-          <path d="M140 440 V150 H660" fill="none" stroke="#FFEF41" stroke-width="2.4" stroke-dasharray="10 16" opacity=".45" style="animation:dash 2.3s linear infinite"></path>
-          <path d="M-20 310 H430 V60 H660" fill="none" stroke="#FFEF41" stroke-width="2.4" stroke-dasharray="10 16" opacity=".6" style="animation:dash 1.9s linear infinite"></path>
+          <path d="M-20 90 H320 V230 H660" fill="none" stroke="#FECB0F" stroke-width="2.4" stroke-dasharray="10 16" opacity=".75" style="animation:dash 1.5s linear infinite"></path>
+          <path d="M140 440 V150 H660" fill="none" stroke="#FECB0F" stroke-width="2.4" stroke-dasharray="10 16" opacity=".45" style="animation:dash 2.3s linear infinite"></path>
+          <path d="M-20 310 H430 V60 H660" fill="none" stroke="#FECB0F" stroke-width="2.4" stroke-dasharray="10 16" opacity=".6" style="animation:dash 1.9s linear infinite"></path>
           <circle cx="320" cy="90" r="7" fill="#040404" stroke="#3a3a3a" stroke-width="3"></circle>
           <circle cx="320" cy="230" r="7" fill="#040404" stroke="#3a3a3a" stroke-width="3"></circle>
           <circle cx="140" cy="150" r="7" fill="#040404" stroke="#3a3a3a" stroke-width="3"></circle>
           <circle cx="430" cy="310" r="7" fill="#040404" stroke="#3a3a3a" stroke-width="3"></circle>
-          <path d="M488 218 L512 242 M512 218 L488 242" stroke="#FFEF41" stroke-width="3"></path>
-          <circle cx="500" cy="230" r="16" fill="none" stroke="#FFEF41" stroke-width="2"></circle>
+          <path d="M488 218 L512 242 M512 218 L488 242" stroke="#FECB0F" stroke-width="3"></path>
+          <circle cx="500" cy="230" r="16" fill="none" stroke="#FECB0F" stroke-width="2"></circle>
           <circle cx="430" cy="60" r="26" fill="#0a0a0a" stroke="#3a3a3a" stroke-width="3"></circle>
-          <line x1="430" y1="60" x2="446" y2="46" stroke="#FFEF41" stroke-width="2.5" style="transform-box:view-box; transform-origin:430px 60px; animation:needle 3.8s ease-in-out infinite"></line>
-          <circle cx="430" cy="60" r="3" fill="#FFEF41"></circle>
+          <line x1="430" y1="60" x2="446" y2="46" stroke="#FECB0F" stroke-width="2.5" style="transform-box:view-box; transform-origin:430px 60px; animation:needle 3.8s ease-in-out infinite"></line>
+          <circle cx="430" cy="60" r="3" fill="#FECB0F"></circle>
         </svg>
         <div style="position:absolute; inset:0; background:linear-gradient(90deg,#040404 34%,rgba(4,4,4,.55) 62%,rgba(4,4,4,.15)); pointer-events:none"></div>
         <div style="max-width:1360px; margin:0 auto; position:relative">
-          <p style="margin:0 0 20px; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.2em"><a href="/" style="color:rgba(255,255,255,.45)">POČETNA</a> / <span style="color:#FFEF41">USLUGE</span></p>
+          <p style="margin:0 0 20px; font:500 11.5px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.45); letter-spacing:.2em"><a href="/" style="color:rgba(255,255,255,.45)">POČETNA</a> / <span style="color:#FECB0F">USLUGE</span></p>
           <h1 data-wp style="margin:0; font:800 clamp(38px,4.6vw,68px)/1 Archivo,sans-serif; letter-spacing:-.035em; color:#fff; max-width:14ch">Četiri discipline. Jedan standard.</h1>
           <p style="margin:22px 0 0; font:400 17px/1.55 Archivo,sans-serif; color:rgba(255,255,255,.68); max-width:56ch">Sve što zakon traži od poslodavca, iz jedne ruke: dokumentacija, obuke, kontrole i zastupanje. Ispod je tačno šta radimo, šta dobijate i šta koliko košta.</p>
           <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:32px">
@@ -92,10 +96,10 @@ const description =
 
       <section id="bzr" style="background:#070707; border-top:1px solid rgba(255,255,255,.09); padding:88px 32px 92px">
         <div style="max-width:1360px; margin:0 auto; position:relative; padding-left:44px">
-          <div style="position:absolute; left:0; top:6px; bottom:6px; width:3px; background:repeating-linear-gradient(180deg,#FFEF41 0 10px,transparent 10px 26px); animation:flowY 1.2s linear infinite" aria-hidden="true"></div>
+          <div style="position:absolute; left:0; top:6px; bottom:6px; width:3px; background:repeating-linear-gradient(180deg,#FECB0F 0 10px,transparent 10px 26px); animation:flowY 1.2s linear infinite" aria-hidden="true"></div>
           <div style="display:flex; flex-wrap:wrap; gap:56px">
             <div style="flex:1 1 480px; min-width:0">
-              <p style="margin:0 0 12px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:rgba(255,239,65,.7)">USLUGA 1.1</p>
+              <p style="margin:0 0 12px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:rgba(254,203,15,.7)">USLUGA 1.1</p>
               <h2 data-wp style="margin:0 0 18px; font:800 clamp(30px,3.4vw,46px)/1.04 Archivo,sans-serif; letter-spacing:-.03em; color:#fff">Bezbednost i zdravlje na radu</h2>
               <p style="margin:0 0 28px; font:400 16px/1.6 Archivo,sans-serif; color:rgba(255,255,255,.65); max-width:56ch">Preuzimamo ulogu savetnika za BZR u vašoj firmi: od akta o proceni rizika do zastupanja pred inspekcijom. Vi potpisujete akt o imenovanju, mi vodimo sistem.</p>
               <div style="display:grid; gap:0">
@@ -103,7 +107,7 @@ const description =
                   <div
                     data-fd
                     style={`display:flex; gap:14px; border-top:1px solid rgba(255,255,255,.12);${i === bzr.deliverables.length - 1 ? ' border-bottom:1px solid rgba(255,255,255,.12);' : ''} padding:15px 0; font:400 15px/1.5 Archivo,sans-serif; color:rgba(255,255,255,.82)${delay(i, 6)}`}
-                  ><span style="color:#FFEF41; font:700 13px 'IBM Plex Mono',monospace; padding-top:2px">{String(i + 1).padStart(2, '0')}</span>{item}</div>
+                  ><span style="color:#FECB0F; font:700 13px 'IBM Plex Mono',monospace; padding-top:2px">{String(i + 1).padStart(2, '0')}</span>{item}</div>
                 ))}
               </div>
               <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:26px; font:600 12px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.7)">
@@ -112,7 +116,7 @@ const description =
                 ))}
               </div>
             </div>
-            <div style="flex:1 1 400px; min-width:0; align-self:flex-start; background:#FFEF41; color:#070707; padding:30px 30px 26px">
+            <div style="flex:1 1 400px; min-width:0; align-self:flex-start; background:#FECB0F; color:#070707; padding:30px 30px 26px">
               <p style="margin:0 0 6px; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.2em; color:rgba(7,7,7,.55)">KONTROLNA LISTA</p>
               <p style="margin:0 0 18px; font:800 22px Archivo,sans-serif; letter-spacing:-.02em">Dokumenta koja morate imati</p>
               <div style="display:grid; gap:0; font:500 14.5px/1.45 Archivo,sans-serif">
@@ -137,7 +141,7 @@ const description =
           <p style="margin:0 0 36px; font:400 16px/1.6 Archivo,sans-serif; color:rgba(7,7,7,.65); max-width:60ch">Referent zaštite od požara za vaš objekat: dokumentacija po kategoriji ugroženosti, obuka zaposlenih i redovna revizija aparata.</p>
           <div style="display:flex; flex-wrap:wrap; gap:40px">
             <div style="flex:1 1 460px; min-width:0">
-              <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px">
+              <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr)); gap:14px">
                 {zop.categories.map((c, i) => (
                   <div data-fd style={`background:#fff; border:1px solid rgba(7,7,7,.18); padding:18px${delay(i, 7)}`}>
                     <p style="margin:0; font:600 10px 'IBM Plex Mono',monospace; letter-spacing:.16em; color:rgba(7,7,7,.45)">{c.kicker}</p>
@@ -156,11 +160,11 @@ const description =
                 ))}
               </div>
             </div>
-            <div data-fd style="flex:0 1 340px; min-width:280px; align-self:flex-start; background:#070707; color:#F2F1EC; padding:28px 28px 26px; transition-delay:.1s">
-              <p style="margin:0; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.2em; color:#FFEF41">NAJLAKŠI PRVI POSAO</p>
+            <div data-fd style="flex:0 1 340px; min-width:0; align-self:flex-start; background:#070707; color:#F2F1EC; padding:28px 28px 26px; transition-delay:.1s">
+              <p style="margin:0; font:600 10.5px 'IBM Plex Mono',monospace; letter-spacing:.2em; color:#FECB0F">NAJLAKŠI PRVI POSAO</p>
               <p style="margin:12px 0 8px; font:800 34px Archivo,sans-serif; letter-spacing:-.02em">od 250 <span style="font:500 13px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.5)">RSD / APARATU</span></p>
               <p style="margin:0 0 18px; font:400 14.5px/1.6 Archivo,sans-serif; color:rgba(255,255,255,.7)">Revizija PP aparata na vašoj adresi, sa nalepnicom i zapisnikom. Pozovite, dolazimo: pa se upoznajemo na poslu, ne na sastanku.</p>
-              <a href="/kontakt" class="btn-y" style="display:inline-block; background:#FFEF41; color:#070707; font:700 13.5px Archivo,sans-serif; padding:12px 20px">Zakažite reviziju →</a>
+              <a href="/kontakt" class="btn-y" style="display:inline-block; background:#FECB0F; color:#070707; font:700 13.5px Archivo,sans-serif; padding:12px 20px">Zakažite reviziju →</a>
             </div>
           </div>
         </div>
@@ -168,19 +172,19 @@ const description =
 
       <section id="koordinator" style="background:#070707; padding:88px 32px 92px">
         <div style="max-width:1360px; margin:0 auto; position:relative; padding-left:44px">
-          <div style="position:absolute; left:0; top:6px; bottom:6px; width:3px; background:repeating-linear-gradient(180deg,#FFEF41 0 10px,transparent 10px 26px); animation:flowY 1.2s linear infinite" aria-hidden="true"></div>
-          <p style="margin:0 0 12px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:rgba(255,239,65,.7)">USLUGA 1.3</p>
+          <div style="position:absolute; left:0; top:6px; bottom:6px; width:3px; background:repeating-linear-gradient(180deg,#FECB0F 0 10px,transparent 10px 26px); animation:flowY 1.2s linear infinite" aria-hidden="true"></div>
+          <p style="margin:0 0 12px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.22em; color:rgba(254,203,15,.7)">USLUGA 1.3</p>
           <h2 data-wp style="margin:0 0 18px; font:800 clamp(30px,3.4vw,46px)/1.04 Archivo,sans-serif; letter-spacing:-.03em; color:#fff">Koordinator za BZR na gradilištu</h2>
           <p style="margin:0 0 14px; font:400 16px/1.6 Archivo,sans-serif; color:rgba(255,255,255,.65); max-width:60ch">Dve lične licence, za obe faze: izradu projekta i izvođenje radova. Tri godine ovog posla na gradilištima u Slovačkoj, sada za investitore u Vojvodini.</p>
           <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:36px">
             {koordinator.licences.map((l) => (
-              <span style="border:1px solid rgba(255,239,65,.4); color:#FFEF41; font:600 11.5px 'IBM Plex Mono',monospace; letter-spacing:.1em; padding:9px 13px">{l}</span>
+              <span style="border:1px solid rgba(254,203,15,.4); color:#FECB0F; font:600 11.5px 'IBM Plex Mono',monospace; letter-spacing:.1em; padding:9px 13px">{l}</span>
             ))}
           </div>
-          <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px">
+          <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr)); gap:16px">
             {koordinator.cards.map((c, i) => (
               <div data-fd style={`border:1px solid rgba(255,255,255,.14); padding:22px${delay(i, 7)}`}>
-                <p style="margin:0; font:800 26px 'IBM Plex Mono',monospace; color:#FFEF41">{c.metric}</p>
+                <p style="margin:0; font:800 26px 'IBM Plex Mono',monospace; color:#FECB0F">{c.metric}</p>
                 <p style="margin:10px 0 6px; font:700 16px Archivo,sans-serif; color:#fff">{c.title}</p>
                 <p style="margin:0; font:400 14px/1.55 Archivo,sans-serif; color:rgba(255,255,255,.6)">{c.text}</p>
               </div>
@@ -210,15 +214,15 @@ const description =
                     : `flex:1 1 300px; background:#fff; border:1px solid rgba(7,7,7,.18); padding:26px${delay(i, 8)}`
                 }
               >
-                <p style={t.dark ? 'margin:0; font:800 34px Archivo,sans-serif; letter-spacing:-.02em; color:#FFEF41' : 'margin:0; font:800 34px Archivo,sans-serif; letter-spacing:-.02em'}>{t.price} <span style={t.dark ? "font:500 13px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.5)" : "font:500 13px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.5)"}>{t.unit}</span></p>
+                <p style={t.dark ? 'margin:0; font:800 34px Archivo,sans-serif; letter-spacing:-.02em; color:#FECB0F' : 'margin:0; font:800 34px Archivo,sans-serif; letter-spacing:-.02em'}>{t.price} <span style={t.dark ? "font:500 13px 'IBM Plex Mono',monospace; color:rgba(255,255,255,.5)" : "font:500 13px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.5)"}>{t.unit}</span></p>
                 <p style={t.dark ? 'margin:12px 0 0; font:400 15px/1.6 Archivo,sans-serif; color:rgba(255,255,255,.75)' : 'margin:12px 0 0; font:400 15px/1.6 Archivo,sans-serif; color:rgba(7,7,7,.7)'}>{t.text}</p>
               </div>
             ))}
           </div>
-          <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:0; border-top:1px solid rgba(7,7,7,.2)">
+          <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr)); gap:0; border-top:1px solid rgba(7,7,7,.2)">
             {obuke.steps.map((s, i) => (
               <div data-fd style={`padding:20px 24px 0 0${delay(i, 6)}`}>
-                <p style={s.highlight ? "margin:0; font:800 22px 'IBM Plex Mono',monospace; color:#FFEF41; -webkit-text-stroke:1px #070707" : "margin:0; font:800 22px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.25)"}>{s.n}</p>
+                <p style={s.highlight ? "margin:0; font:800 22px 'IBM Plex Mono',monospace; color:#FECB0F; -webkit-text-stroke:1px #070707" : "margin:0; font:800 22px 'IBM Plex Mono',monospace; color:rgba(7,7,7,.25)"}>{s.n}</p>
                 <p style="margin:8px 0 4px; font:700 16px Archivo,sans-serif">{s.title}</p>
                 <p style="margin:0; font:400 13.5px/1.5 Archivo,sans-serif; color:rgba(7,7,7,.6)">{s.text}</p>
               </div>
@@ -227,14 +231,14 @@ const description =
         </div>
       </section>
 
-      <section style="background:#FFEF41; color:#070707; padding:72px 32px">
+      <section style="background:#FECB0F; color:#070707; padding:72px 32px">
         <div style="max-width:1360px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:28px">
           <div>
             <p data-wp style="margin:0; font:800 clamp(26px,3vw,40px)/1.1 Archivo,sans-serif; letter-spacing:-.03em; max-width:26ch">Ne znate šta vam od ovoga treba?</p>
             <p style="margin:10px 0 0; font:400 16px/1.55 Archivo,sans-serif; color:rgba(7,7,7,.7)">Ulazni audit kaže tačno: šta imate, šta fali i koliko košta. Bez obaveze.</p>
           </div>
           <div style="display:flex; flex-wrap:wrap; gap:12px">
-            <a href="/kontakt" class="btn-dark" style="background:#070707; color:#FFEF41; font:700 15px Archivo,sans-serif; padding:16px 28px">Zatražite ponudu</a>
+            <a href="/kontakt" class="btn-dark" style="background:#070707; color:#FECB0F; font:700 15px Archivo,sans-serif; padding:16px 28px">Zatražite ponudu</a>
             <a href="tel:+381638185587" class="btn-outline" style="border:2px solid #070707; color:#070707; font:600 14.5px 'IBM Plex Mono',monospace; padding:14px 24px">063 81 855 87</a>
           </div>
         </div>

@@ -21,7 +21,7 @@ class RefineryScene extends HTMLElement {
     const steel = new THREE.MeshStandardMaterial({ color: 0x8f9296, metalness: .85, roughness: .38 });
     const steelDark = new THREE.MeshStandardMaterial({ color: 0x43464a, metalness: .8, roughness: .55 });
     const steelDim = new THREE.MeshStandardMaterial({ color: 0x63666a, metalness: .82, roughness: .5 });
-    const yellowMat = new THREE.MeshStandardMaterial({ color: 0xffef41, metalness: .25, roughness: .55, emissive: 0x201c00 });
+    const yellowMat = new THREE.MeshStandardMaterial({ color: 0xfecb0f, metalness: .25, roughness: .55, emissive: 0x201902 });
     const beaconMat = () => new THREE.MeshStandardMaterial({ color: 0x330000, emissive: 0xff2200, emissiveIntensity: 2 });
 
     const world = new THREE.Group(); scene.add(world);
@@ -123,11 +123,11 @@ class RefineryScene extends HTMLElement {
     const tilt = new THREE.Group(); tilt.rotation.x = 0.62; pivot.add(tilt);
     const coneLen = 30;
     const coneGeo = new THREE.CylinderGeometry(.12, 7, coneLen, 28, 1, true); coneGeo.translate(0, -coneLen / 2, 0);
-    const cone = new THREE.Mesh(coneGeo, new THREE.MeshBasicMaterial({ color: 0xffef41, transparent: true, opacity: .05, side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false }));
+    const cone = new THREE.Mesh(coneGeo, new THREE.MeshBasicMaterial({ color: 0xfecb0f, transparent: true, opacity: .05, side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false }));
     tilt.add(cone);
-    const spot = new THREE.SpotLight(0xffef41, 900, 70, .34, .5, 1.6);
+    const spot = new THREE.SpotLight(0xfecb0f, 900, 70, .34, .5, 1.6);
     tilt.add(spot); spot.target.position.set(0, -coneLen, 0); tilt.add(spot.target);
-    const head = new THREE.Mesh(new THREE.SphereGeometry(.5, 14, 12), new THREE.MeshStandardMaterial({ color: 0x111111, emissive: 0xffef41, emissiveIntensity: 1.4 }));
+    const head = new THREE.Mesh(new THREE.SphereGeometry(.5, 14, 12), new THREE.MeshStandardMaterial({ color: 0x111111, emissive: 0xfecb0f, emissiveIntensity: 1.4 }));
     pivot.add(head);
     mast.position.set(-18, 0, -2); world.add(mast);
 

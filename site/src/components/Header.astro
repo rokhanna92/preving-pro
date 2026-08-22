@@ -52,7 +52,7 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
 ---
 
 {showBanner && (
-<div style={bannerStyle}>
+<div class="hdr-banner" style={bannerStyle}>
   <span style="font:600 11.5px 'IBM Plex Mono',monospace; letter-spacing:.14em">ČETIRI NOVA PRAVILNIKA SE PRIMENJUJU OD 01.01.2027. · JOŠ <span data-cd="days">{days}</span> DANA</span>
   <a href={bannerHref} class="hdr-banner-a" style={bannerLinkStyle}>PROVERITE OBAVEZE →</a>
 </div>
@@ -277,7 +277,9 @@ const days = Math.max(0, Math.floor((target - Date.now()) / 864e5));
     .hdr-right { gap: 8px !important; }
     .cone-btn { display: grid; }
     .cone-menu { display: flex; }
-    .hdr-banner-a { display: inline-block; padding: 7px 0; }
+    /* Traka sa rokom ide samo na desktop. Na telefonu i tabletu zauzima
+       pola prvog ekrana, a isti rok stoji nize u sadrzaju strane. */
+    .hdr-banner { display: none !important; }
   }
 
   @media (max-width: 460px) {
